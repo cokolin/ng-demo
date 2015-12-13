@@ -33,14 +33,19 @@ import ng.demo.vo.QueryVo;
 public class DemoController {
 	private final static Logger logger = LogManager.getLogger();
 
-	/**
-	 * 页面
-	 * 
-	 * @return
-	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
-		return "demo/demo";
+		return "redirect:/demo/demo-1.4";
+	}
+	
+	@RequestMapping(value="/demo-1.2", method = RequestMethod.GET)
+	public String demo12() {
+		return "demo/demo-1.2";
+	}
+	
+	@RequestMapping(value="/demo-1.4", method = RequestMethod.GET)
+	public String demo14() {
+		return "demo/demo-1.4";
 	}
 
 	/**
