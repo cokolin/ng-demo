@@ -3,7 +3,7 @@
 <html ng-app='fcsApp'>
 <head>
 <meta charset="UTF-8">
-<title>ng 1.4 CURD示例</title>
+<title>CURD示例</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="//libs.cdnjs.net/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/base.css" rel="stylesheet">
@@ -12,7 +12,7 @@
 	<div class='container'>
 		<ol class="breadcrumb">
 			<li><a href="/">主页</a></li>
-			<li class='active'>1.4 CURD示例</li>
+			<li class='active'>AngularJS 1.4 CURD示例</li>
 		</ol>
 		<div class='row'>
 			<form class="form-horizontal" name='queryForm' ng-submit='dc.doQuery()'>
@@ -76,6 +76,6 @@
 	<script src="/app/value.js"></script>
 	<script src="/app/filter.js"></script>
 	<script src="/app/service.js"></script>
-	<script src="/app/demo-1.4/controllers.js"></script>
+	<script src="/app/demo-curd/controllers.js"></script>
 </body>
 </html>

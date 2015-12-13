@@ -35,19 +35,14 @@ public class DemoController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
-		return "redirect:/demo/demo-1_4";
+		return "redirect:/demo/demo-curd";
 	}
 	
-	@RequestMapping(value="/demo-1_2", method = RequestMethod.GET)
-	public String demo12() {
-		return "demo/demo-1_2";
+	@RequestMapping(value="/demo-curd", method = RequestMethod.GET)
+	public String curd() {
+		return "demo/demo-curd";
 	}
 	
-	@RequestMapping(value="/demo-1_4", method = RequestMethod.GET)
-	public String demo14() {
-		return "demo/demo-1_4";
-	}
-
 	/**
 	 * 上传
 	 * 
@@ -143,8 +138,8 @@ public class DemoController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public JsonResp<DemoVo> load(@PathVariable("id") long id) {
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	public JsonResp<DemoVo> get(@PathVariable("id") long id) {
 		return JsonResp.create(this.create(id, new Random()));
 	}
 
