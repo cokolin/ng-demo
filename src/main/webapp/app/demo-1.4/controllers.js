@@ -13,21 +13,23 @@ fcsApp.controller('DemoController', ['$http', 'TypeAndStatus', function($http, T
 		page: 1,
 		length: 15
 	};
-
-	dc.query = function(){
-
+	
+	
+	dc.queryNow = false;
+	dc.doQuery = function(){
+		console.log(dc.queryArgs);
 	};
 
-	dc.create = function(){
-
+	dc.doCreate = function(){
+		console.log(dc.createArgs);
 	};
 
-	dc.update = function(){
-
+	dc.doUpdate = function(){
+		console.log(dc.updateArgs);
 	};
 
-	dc.remove = function(){
-
+	dc.doRemove = function(){
+		console.log(dc.removeArgs);
 	};
 
 	dc.checkOne = function(model, list){

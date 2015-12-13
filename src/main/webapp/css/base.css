@@ -1,0 +1,17 @@
+@media (min-width: 1366px){
+	.container{
+		width: 1330px;
+	}
+}
+
+@media (min-width: 1440px){
+	.container{
+		width: 1400px;
+	}
+}
+
+@media (min-width: 1600px){
+	.container{
+		width: 1500px;
+	}
+}

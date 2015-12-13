@@ -35,17 +35,17 @@ public class DemoController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
-		return "redirect:/demo/demo-1.4";
+		return "redirect:/demo/demo-1_4";
 	}
 	
-	@RequestMapping(value="/demo-1.2", method = RequestMethod.GET)
+	@RequestMapping(value="/demo-1_2", method = RequestMethod.GET)
 	public String demo12() {
-		return "demo/demo-1.2";
+		return "demo/demo-1_2";
 	}
 	
-	@RequestMapping(value="/demo-1.4", method = RequestMethod.GET)
+	@RequestMapping(value="/demo-1_4", method = RequestMethod.GET)
 	public String demo14() {
-		return "demo/demo-1.4";
+		return "demo/demo-1_4";
 	}
 
 	/**

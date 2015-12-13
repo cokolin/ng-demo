@@ -20,7 +20,7 @@ fcsApp.constant('TypeAndStatus', {
 	}],
 	demoStatus: [{
 		id: 'INIT',
-		text: '初始化'
+		text: '新建'
 	}, {
 		id: 'SIGN_IN',
 		text: '签发'
