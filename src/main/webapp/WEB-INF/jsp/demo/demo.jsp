@@ -3,14 +3,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>demo</title>
+<title>示例</title>
 </head>
 <body>
-<ul>
-	<li>${result1}</li>
-	<li>${result2}</li>
-	<li>${result3}</li>
-</ul>
-<div><a href="/index.jsp">主页</a></div>
+	<ul>
+		<li><a href="/">主页</a></li>
+		<li><a href="/demo">示例</a></li>
+	</ul>
+	<div>
+		
+	</div>
 </body>
 </html>

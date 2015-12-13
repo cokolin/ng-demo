@@ -3,13 +3,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>哈哈</title>
+<title>主页</title>
 </head>
 <body>
-	
-	<div>
-		<a href="/index.jsp">主页</a>
-	</div>
+	<ul>
+		<li><a href="/">主页</a></li>
+		<li><a href="/demo">示例</a></li>
+	</ul>
 	<ol>
 		<li>${applicationScope.test}</li>
 		<li>${pageContext.request.contextPath}</li>
