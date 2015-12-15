@@ -1,0 +1,20 @@
+<div class='col-xs-12'>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>A1</th>
+        <th>A2</th>
+        <th>A3</th>
+        <th>A4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='it in dc.queryList'>
+        <td ng-bind='it.name1 | str | left: 6'></td>
+        <td ng-bind='it.name2 | code:"AAA"'></td>
+        <td ng-bind='it.name3 | number:2'></td>
+        <td ng-bind='it.name4'></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
