@@ -1,62 +1,113 @@
 'use strict';
 fcsApp.controller('DemoController', ['$http', 'TypeAndStatus', function($http, TypeAndStatus){
-	var dc = this;
+  var dc = this;
 
-	dc.queryFormHtml = '/html/demo/query-form.html';
+  dc.queryFormHtml = '/html/demo/query-form.html';
 
-	dc.typeList = angular.copy(TypeAndStatus.demoTypes);
+  dc.queryTableHtml = '/html/demo/query-table.html';
 
-	dc.statusList = angular.copy(TypeAndStatus.demoStatus);
+  dc.typeList = angular.copy(TypeAndStatus.demoTypes);
 
-	dc.queryArgs = {
-		type: [],
-		page: 1,
-		length: 15
-	};
-	
-	
-	dc.queryNow = false;
-	dc.doQuery = function(){
-		console.log(dc.queryArgs);
-	};
+  dc.statusList = angular.copy(TypeAndStatus.demoStatus);
 
-	dc.doCreate = function(){
-		console.log(dc.createArgs);
-	};
+  dc.queryArgs = {
+    type: [],
+    page: 1,
+    length: 15
+  };
 
-	dc.doUpdate = function(){
-		console.log(dc.updateArgs);
-	};
+  dc.queryList = [{
+    name1: Math.random(),
+    name2: 'MANUAL',
+    name3: Math.random(),
+    name4: Math.random(),
+  }, {
+    name1: Math.random(),
+    name2: 'MONTHLY',
+    name3: Math.random(),
+    name4: Math.random(),
+  }, {
+    name1: Math.random(),
+    name2: 'PROGRESS',
+    name3: Math.random(),
+    name4: Math.random(),
+  }, {
+    name1: Math.random(),
+    name2: 'PROGRESS',
+    name3: Math.random(),
+    name4: Math.random(),
+  }];
 
-	dc.doRemove = function(){
-		console.log(dc.removeArgs);
-	};
+  dc.queryNow = false;
+  dc.doQuery = function(){
+    console.log(dc.queryArgs);
+  };
 
-	dc.checkOne = function(model, list){
-		model.splice(0, model.length);
-		angular.forEach(list, function(it){
-			if (it._check){
-				model.push(it.id);
-			}
-		});
-	};
+  dc.doCreate = function(){
+    console.log(dc.createArgs);
+  };
 
-	dc.checkAll = function(model, list){
-		if (model.length > 0){// unchecked
-			angular.forEach(list, function(it){
-				it._check = false;
-			});
-			model.splice(0, model.length);
-		} else{
-			model.splice(0, model.length);
-			angular.forEach(list, function(it){
-				it._check = true;
-				model.push(it.id);
-			});
-		}
-	};
+  dc.doUpdate = function(){
+    console.log(dc.updateArgs);
+  };
 
-	dc.date = new Date();
+  dc.doRemove = function(){
+    console.log(dc.removeArgs);
+  };
 
-	console.log(dc);
+  dc.checkOne = function(model, list){
+    model.splice(0, model.length);
+    angular.forEach(list, function(it){
+      if (it._check){
+        model.push(it.id);
+      }
+    });
+  };
+
+  dc.checkAll = function(model, list){
+    if (model.length > 0){// unchecked
+      angular.forEach(list, function(it){
+        it._check = false;
+      });
+      model.splice(0, model.length);
+    } else{
+      model.splice(0, model.length);
+      angular.forEach(list, function(it){
+        it._check = true;
+        model.push(it.id);
+      });
+    }
+  };
+
+  dc.date = new Date();
+
+  console.log(dc);
+}]);
+
+fcsApp.controller('DemoAddController', ['$http', '$scope', function($http, $scope){
+  var da = this;
+  var dc = $scope.dc;
+  
+  da.name = "DemoAddController";
+  
+  dc.test = Math.random();
+  
+  console.log(da);
+  console.log($scope);
+}]);
+
+fcsApp.controller('DemoEditController', ['$http', '$scope', '$timeout', 'fcs.query', function($http, $scope,$timeout, query){
+  var de = this;
+  var dc = $scope.dc;
+  
+  de.name = "DemoEditController";
+  
+  de.editHtml = '/html/demo/dialog-edit.html';
+  
+  $timeout(function(){
+    query.print("haha");
+  },3000);
+  
+  console.log(de);
+  console.log($scope);
 }]);

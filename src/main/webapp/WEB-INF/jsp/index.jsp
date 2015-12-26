@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>主页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//libs.cdnjs.net/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="/libs/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
