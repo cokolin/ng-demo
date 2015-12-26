@@ -29,20 +29,15 @@ import ng.demo.vo.QueryVo;
  * @author cokolin
  */
 @Controller
-@RequestMapping("/demo")
-public class DemoController {
+@RequestMapping("/crud")
+public class CrudController {
 	private final static Logger logger = LogManager.getLogger();
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index() {
-		return "redirect:/demo/demo-curd";
+		return "crud/curd-index";
 	}
-	
-	@RequestMapping(value="/demo-curd", method = RequestMethod.GET)
-	public String curd() {
-		return "demo/demo-curd";
-	}
-	
+
 	/**
 	 * 上传
 	 * 

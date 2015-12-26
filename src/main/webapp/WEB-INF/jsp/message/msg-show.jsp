@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html ng-app='fcsApp'>
 <head>
 <meta charset="UTF-8">
 <title>消息</title>
@@ -9,27 +9,16 @@
 <link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container">
+	<div class="container" ng-controller='MsgShowController as ms'>
 		<div class="row">
-			<div class="col-xs-12">
-				<form>
-					<div class="form-group">
-						<div class="col-xs-4">
-							<input name="user" type="text" placeholder="用户" maxlength="100">
-						</div>
-						<div class="col-xs-4">
-							<input name="message" type="text" placeholder="消息" maxlength="400">
-						</div>
-						<div class="col-xs-4">
-							<button type="submit" class="btn btn-primary">发送</button>
-						</div>
-					</div>
-				</form>
-			</div>
 			<div class="col-xs-12">
 				<ul id="msg"></ul>
 			</div>
 		</div>
 	</div>
+	<script src="/libs/jquery/2.1.1/jquery.js"></script>
+	<script src="/libs/angular/1.4.8/angular.js"></script>
+	<script src="/app/base.js"></script>
+	<script src="/app/message/controllers.js"></script>
 </body>
 </html>

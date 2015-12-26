@@ -1,15 +1,19 @@
-package ng.demo.ws;
+package ng.demo.controller;
 
 import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
+import ng.demo.web.Constants;
 import ng.demo.web.handler.DemoWebSocketHandler;
 
 /**
@@ -24,19 +28,28 @@ public class MessageController {
 	@Autowired
 	private DemoWebSocketHandler demoWebSocketHandler;
 
-	@RequestMapping
+	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index() {
 		return "message/msg-index";
 	}
 
-	@RequestMapping("show")
+	@RequestMapping(value = "show", method = RequestMethod.GET)
 	public String show() {
 		return "message/msg-show";
 	}
 
 	@ResponseBody
-	@RequestMapping("all")
-	public String all(String message) {
+	@RequestMapping("set-username")
+	public String setUsername(String username, HttpServletRequest request) {
+		logger.info(username);
+		request.getSession(true).setAttribute(Constants.SESSION_USERNAME, username);
+		return "done";
+	}
+
+	@ResponseBody
+	@RequestMapping("send-all-msg")
+	public String sendAllMsg(String message) {
+		logger.info(message);
 		try {
 			demoWebSocketHandler.sendMessage(new TextMessage(message));
 		} catch (IOException e) {
@@ -47,8 +60,9 @@ public class MessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping("user")
-	public String user(String user, String message) {
+	@RequestMapping("send-user-msg")
+	public String sendUserMsg(String user, String message) {
+		logger.info("{}, {}", user, message);
 		try {
 			demoWebSocketHandler.sendUserMessage(user, new TextMessage(message));
 		} catch (IOException e) {
@@ -59,8 +73,9 @@ public class MessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping("type")
-	public String session(String type, String key, String message) {
+	@RequestMapping("send-type-msg")
+	public String sendTypeMsg(String type, String key, String message) {
+		logger.info("{}, {}, {}", type, key, message);
 		try {
 			demoWebSocketHandler.sendMessage(type, key, new TextMessage(message));
 		} catch (IOException e) {

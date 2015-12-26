@@ -35,6 +35,6 @@
 	<script src="/app/value.js"></script>
 	<script src="/app/filter.js"></script>
 	<script src="/app/service.js"></script>
-	<script src="/app/demo-curd/controllers.js"></script>
+	<script src="/app/curd/controllers.js"></script>
 </body>
 </html>

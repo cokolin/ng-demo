@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ng.demo.kit.WebKit;
 
@@ -15,7 +16,7 @@ import ng.demo.kit.WebKit;
 public class IndexController {
 	private final static Logger logger = LogManager.getLogger();
 
-	@RequestMapping
+	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index() {
 		logger.info("index {}", WebKit.getServletContext().getContextPath());
 		return "index";

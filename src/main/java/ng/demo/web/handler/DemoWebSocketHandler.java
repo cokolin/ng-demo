@@ -1,8 +1,8 @@
 package ng.demo.web.handler;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +21,7 @@ import ng.demo.web.Constants;
 public class DemoWebSocketHandler extends TextWebSocketHandler {
 	private static Logger logger = LogManager.getLogger();
 
-	private List<WebSocketSession> sessions = new ArrayList<>();
+	private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
