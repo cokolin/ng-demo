@@ -9,16 +9,22 @@
 <link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
-	<ul>
-		<li><a href="/">主页</a></li>
-		<li><a href="/libs/angular/1.2.29/docs/index.html">AngularJS 1.2.29 API</a></li>
-		<li><a href="/libs/angular/1.4.8/docs/index.html">AngularJS 1.4.8 API</a></li>
-		<li><a href="/demo/demo-curd">AngularJS 1.4 CURD示例</a></li>
-	</ul>
-	<ol>
-		<li>${applicationScope.test}</li>
-		<li>${pageContext.request.contextPath}</li>
-		<li>${requestScope.path}</li>
-	</ol>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<ul>
+					<li><a href="/">主页</a></li>
+					<li><a href="/libs/angular/1.2.29/docs/index.html">AngularJS 1.2.29 API</a></li>
+					<li><a href="/libs/angular/1.4.8/docs/index.html">AngularJS 1.4.8 API</a></li>
+					<li><a href="/demo/demo-curd">AngularJS 1.4 CURD示例</a></li>
+				</ul>
+				<ol>
+					<li>${applicationScope.test}</li>
+					<li>${pageContext.request.contextPath}</li>
+					<li>${requestScope.path}</li>
+				</ol>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

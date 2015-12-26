@@ -4,12 +4,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import ng.demo.web.handler.DataBindingInitializer;
 import ng.demo.web.interceptor.BaseInterceptor;
@@ -29,11 +34,8 @@ import ng.demo.web.interceptor.BaseInterceptor;
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
-	public InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/jsp/");
-		resolver.setSuffix(".jsp");
-		return resolver;
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 
 	@Bean
@@ -46,6 +48,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new BaseInterceptor());
+	}
+
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.enableContentNegotiation(new MappingJackson2JsonView());
+		registry.jsp("/WEB-INF/jsp/", ".jsp");
+	}
+
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer.mediaType("xml", MediaType.APPLICATION_XML);
+		configurer.mediaType("json", MediaType.APPLICATION_JSON);
 	}
 
 	@Override

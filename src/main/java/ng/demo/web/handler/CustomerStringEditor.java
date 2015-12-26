@@ -3,6 +3,8 @@ package ng.demo.web.handler;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.util.HtmlUtils;
 
+import ng.demo.web.Constants;
+
 /**
  * 字符串处理类
  * 
@@ -25,7 +27,7 @@ public class CustomerStringEditor extends StringTrimmerEditor {
   public void setAsText(String text) {
     String value = text;
     if (text != null) {
-      value = HtmlUtils.htmlEscape(text);
+      value = HtmlUtils.htmlEscape(text, Constants.DEFAULT_CHARSET);
     }
     super.setAsText(value);
   }

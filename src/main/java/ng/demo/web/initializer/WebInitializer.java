@@ -67,12 +67,12 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;// null表示不设置ApplicationContext
+		return new Class<?>[]{};// null或空数组表示不设置ApplicationContext
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { WebMvcConfig.class };
+		return new Class[] { WebMvcConfig.class, WebSocketConfig.class };
 	}
 
 	@Override
@@ -83,8 +83,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		String location = "/tmp";
-		int maxRequestSize = 10 * 1024 * 1024;// 10MiB
 		int thresholdSize = 1024 * 1024;// 1MiB
+		int maxRequestSize = 10 * 1024 * 1024;// 10MiB
 		MultipartConfigElement config = new MultipartConfigElement(location, maxRequestSize, maxRequestSize, thresholdSize);
 		registration.setMultipartConfig(config);
 	}
