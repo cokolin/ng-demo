@@ -10,12 +10,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import ng.demo.kit.WebKit;
-import ng.demo.web.Constants;
 import ng.demo.web.filter.BaseFilter;
 
 /**
@@ -33,7 +31,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		logger.info("Befor initializer Spring web mvc...");
 		this.addBaseFilter();
 		this.addHiddenHttpMethodFilter();
-		this.addCharacterEncodingFilter();
 	}
 
 	private void afterInitializer() {
@@ -48,13 +45,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	private void addHiddenHttpMethodFilter() {
 		Class<? extends Filter> clazz = HiddenHttpMethodFilter.class;
 		servletContext.addFilter(clazz.getSimpleName(), clazz).addMappingForUrlPatterns(null, true, "/*");
-	}
-
-	private void addCharacterEncodingFilter() {
-		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding(Constants.DEFAULT_CHARSET);
-		filter.setForceEncoding(true);
-		servletContext.addFilter(filter.getClass().getSimpleName(), filter).addMappingForUrlPatterns(null, true, "/*");
 	}
 
 	@Override

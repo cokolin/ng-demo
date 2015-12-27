@@ -44,7 +44,7 @@ fcsApp.controller('MsgShowController', ["$scope", function($scope){
 	ms.msgs = ["web-socket not init"];
 
 	ms.open = function(){
-		var url = "ws://localhost:8090/ws/server";
+		var url = "ws://localhost:8090/ws/demo";
 
 		var socket = new WebSocket(url);
 
@@ -58,14 +58,14 @@ fcsApp.controller('MsgShowController', ["$scope", function($scope){
 
 		socket.onmessage = function(event){
 			console.log(event);
-			ms.msgs.push(JSON.parse(event.data));
+			ms.msgs.push(event.data);
 			$scope.$digest();
 		}
 
 		socket.onerror = function(event){
 			console.log(event);
 		};
-		
+
 		ms.socket = socket;
 		console.log(socket);
 	};
@@ -78,9 +78,10 @@ fcsApp.controller('MsgShowController', ["$scope", function($scope){
 
 	ms.close = function(){
 		ms.socket.close();
+		ms.socket = null;
 		console.log("close");
 	};
-	
-	//$scope.$digest();
+
+	// $scope.$digest();
 	console.log(ms, $scope);
 }]);

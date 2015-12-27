@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
+
+import ng.demo.web.Constants;
+
 public class BaseFilter implements Filter {
 	private Logger logger = LogManager.getLogger();
 
@@ -24,7 +28,11 @@ public class BaseFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		logger.info(((HttpServletRequest) request).getServletPath());
+		request.setCharacterEncoding(Constants.DEFAULT_CHARSET);
+		response.setCharacterEncoding(Constants.DEFAULT_CHARSET);
+		
+		HttpServletRequest req = (HttpServletRequest) request;
+		logger.info("{}?{}, {}, {}", req.getServletPath(), req.getQueryString(), req.getMethod(), JSON.toJSONString(req.getParameterMap()));
 		try {
 			chain.doFilter(request, response);
 		} catch (Exception e) {
