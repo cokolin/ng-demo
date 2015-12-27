@@ -20,17 +20,18 @@ fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scop
 	};
 
 	function post(url, dat, success, error){
-		$http.post(url, dat, PostConfig).success(success ? success : call).error(error ? error : call);
+		$http.post(url, dat).success(success ? success : call).error(error ? error : call);
 		mc.flag = true;
 	}
-	
-	mc.open = function(){
+
+	function open(dat){
 		var url = "ws://localhost:8090/ws/demo";
 
 		var socket = new WebSocket(url);
 
 		socket.onopen = function(event){
 			console.log(event);
+			mc.msg.src = dat.usr;
 		}
 
 		socket.onclose = function(event){
@@ -49,41 +50,48 @@ fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scop
 
 		mc.socket = socket;
 		console.log(socket);
-	};
+	}
 
-	mc.send = function(){
+	function send(){
 		var msg = JSON.stringify(ms.msg);
 		console.log(msg);
 		mc.socket.send(msg);
-	};
+	}
 
-	mc.close = function(){
-		if(mc.socket){
+	function close(){
+		if (mc.socket){
 			mc.socket.close();
 			mc.socket = null;
 		}
+		mc.msg.src = null;
 		console.log("close socket");
-	};
+	}
 
 	mc.login = function(){
-		post("/message/set-user", mc.msg, function(resp){
+		var dat = {
+			usr: mc.msg.usr
+		};
+		post("/message/set-user", dat, function(resp){
 			mc.flag = false;
 			mc.resp = resp;
-			mc.close();
-			mc.open();
+			close();
+			open(dat);
 		});
 	};
-	
+
 	mc.logout = function(){
-		mc.close();
+		close();
 	};
 
 	mc.usrMsg = function(){
+		
 		post("/message/send-user-msg", mc.msg);
 	};
 
 	mc.allMsg = function(){
-		post("/message/send-all-msg", mc.msg);
+		var dat = angular.copy(mc.msg);
+		delete dat.usr;
+		post("/message/send-all-msg", dat);
 	};
 
 	console.log(mc);
