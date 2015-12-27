@@ -31,20 +31,20 @@ public class DemoWebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
-		super.afterConnectionEstablished(session);
 	}
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		logger.info("websocket connection closed...");
 		if (session.isOpen()) {
 			session.close();
+			logger.info("websocket error closed : {}", session);
 		}
-		sessions.remove(session);
+		this.afterConnectionClosed(session, CloseStatus.SERVER_ERROR);
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		logger.info("websocket remove : {}", session);
 		sessions.remove(session);
 	}
 

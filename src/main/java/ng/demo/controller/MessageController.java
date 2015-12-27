@@ -41,10 +41,10 @@ public class MessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping("set-username")
-	public JsonResp<String> setUsername(String username, HttpServletRequest request) {
-		logger.info(username);
-		request.getSession(true).setAttribute(Constants.SESSION_USERNAME, username);
+	@RequestMapping("set-user")
+	public JsonResp<String> setUser(String usr, HttpServletRequest request) {
+		logger.info(usr);
+		request.getSession(true).setAttribute(Constants.SESSION_USERNAME, usr);
 		return JsonResp.create("done");
 	}
 
@@ -63,23 +63,10 @@ public class MessageController {
 
 	@ResponseBody
 	@RequestMapping("send-user-msg")
-	public JsonResp<String> sendUserMsg(String user, String msg) {
-		logger.info("{}, {}", user, msg);
+	public JsonResp<String> sendUserMsg(String usr, String msg) {
+		logger.info("{}, {}", usr, msg);
 		try {
-			demoWebSocketHandler.sendUserMessage(user, new TextMessage(msg));
-		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
-			return JsonResp.create(e.getMessage());
-		}
-		return JsonResp.create("done");
-	}
-
-	@ResponseBody
-	@RequestMapping("send-type-msg")
-	public JsonResp<String> sendTypeMsg(String type, String key, String msg) {
-		logger.info("{}, {}, {}", type, key, msg);
-		try {
-			demoWebSocketHandler.sendMessage(type, key, new TextMessage(msg));
+			demoWebSocketHandler.sendUserMessage(usr, new TextMessage(msg));
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 			return JsonResp.create(e.getMessage());

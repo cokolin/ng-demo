@@ -1,8 +1,9 @@
 'use strict';
-fcsApp.controller('MessageController', ['$http', function($http){
+fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scope){
 	var mc = this;
-	mc.postFlag = false;
+	mc.flag = false;
 	mc.msgs = [];
+	mc.resp = null;
 
 	var PostConfig = {
 		headers: {
@@ -14,36 +15,16 @@ fcsApp.controller('MessageController', ['$http', function($http){
 	};
 
 	var call = function(resp){
-		mc.postFlag = false;
-		mc.msgs.push(resp);
+		mc.flag = false;
+		mc.resp = resp;
 	};
 
-	function post(url, data){
-		$http.post(url, data, PostConfig).success(call).error(call);
-		mc.postFlag = true;
+	function post(url, dat, success, error){
+		$http.post(url, dat, PostConfig).success(success ? success : call).error(error ? error : call);
+		mc.flag = true;
 	}
-
-	mc.setUsername = function(){
-		post("/message/set-username", mc.usr);
-	}
-
-	mc.sendUserMsg = function(){
-		post("/message/send-user-msg", mc.usrMsg);
-	};
-
-	mc.sendAllMsg = function(){
-		post("/message/send-all-msg", mc.allMsg);
-	};
-
-	console.log(mc);
-}]);
-
-fcsApp.controller('MsgShowController', ["$scope", function($scope){
-	var ms = this;
-	ms.socket = null;
-	ms.msgs = ["web-socket not init"];
-
-	ms.open = function(){
+	
+	mc.open = function(){
 		var url = "ws://localhost:8090/ws/demo";
 
 		var socket = new WebSocket(url);
@@ -58,7 +39,7 @@ fcsApp.controller('MsgShowController', ["$scope", function($scope){
 
 		socket.onmessage = function(event){
 			console.log(event);
-			ms.msgs.push(event.data);
+			mc.msgs.unshift(event.data);
 			$scope.$digest();
 		}
 
@@ -66,22 +47,44 @@ fcsApp.controller('MsgShowController', ["$scope", function($scope){
 			console.log(event);
 		};
 
-		ms.socket = socket;
+		mc.socket = socket;
 		console.log(socket);
 	};
 
-	ms.send = function(){
+	mc.send = function(){
 		var msg = JSON.stringify(ms.msg);
 		console.log(msg);
-		ms.socket.send(msg);
+		mc.socket.send(msg);
 	};
 
-	ms.close = function(){
-		ms.socket.close();
-		ms.socket = null;
-		console.log("close");
+	mc.close = function(){
+		if(mc.socket){
+			mc.socket.close();
+			mc.socket = null;
+		}
+		console.log("close socket");
 	};
 
-	// $scope.$digest();
-	console.log(ms, $scope);
+	mc.login = function(){
+		post("/message/set-user", mc.msg, function(resp){
+			mc.flag = false;
+			mc.resp = resp;
+			mc.close();
+			mc.open();
+		});
+	};
+	
+	mc.logout = function(){
+		mc.close();
+	};
+
+	mc.usrMsg = function(){
+		post("/message/send-user-msg", mc.msg);
+	};
+
+	mc.allMsg = function(){
+		post("/message/send-all-msg", mc.msg);
+	};
+
+	console.log(mc);
 }]);
