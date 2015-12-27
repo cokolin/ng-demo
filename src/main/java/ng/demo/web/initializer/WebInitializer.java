@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import ng.demo.kit.WebKit;
 import ng.demo.web.Constants;
+import ng.demo.web.filter.BaseFilter;
 
 /**
  * @author Cokolin
@@ -30,12 +31,18 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	private void beforeInitializer() {
 		logger.info("Befor initializer Spring web mvc...");
+		this.addBaseFilter();
 		this.addHiddenHttpMethodFilter();
 		this.addCharacterEncodingFilter();
 	}
 
 	private void afterInitializer() {
 		logger.info("After initializer Spring web mvc...");
+	}
+
+	private void addBaseFilter() {
+		Class<? extends Filter> clazz = BaseFilter.class;
+		servletContext.addFilter(clazz.getSimpleName(), clazz).addMappingForUrlPatterns(null, true, "/*");
 	}
 
 	private void addHiddenHttpMethodFilter() {
@@ -67,7 +74,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[]{};// null或空数组表示不设置ApplicationContext
+		return new Class<?>[] {};// 空数组表示不设置ApplicationContext
 	}
 
 	@Override

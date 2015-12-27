@@ -2,6 +2,7 @@
 fcsApp.controller('MessageController', ['$http', function($http){
 	var mc = this;
 	mc.postFlag = false;
+	mc.msgs = [];
 
 	var PostConfig = {
 		headers: {
@@ -12,14 +13,13 @@ fcsApp.controller('MessageController', ['$http', function($http){
 		}
 	};
 
+	var call = function(resp){
+		mc.postFlag = false;
+		mc.msgs.push(resp);
+	};
+
 	function post(url, data){
-		$http.post(url, data, PostConfig).success(function(msg){
-			mc.postFlag = false;
-			$AE("#msg").append("<li>" + msg + "</li>");
-		}).error(function(msg){
-			mc.postFlag = false;
-			$AE("#msg").append("<li>" + msg + "</li>");
-		});
+		$http.post(url, data, PostConfig).success(call).error(call);
 		mc.postFlag = true;
 	}
 
@@ -38,8 +38,49 @@ fcsApp.controller('MessageController', ['$http', function($http){
 	console.log(mc);
 }]);
 
-fcsApp.controller('MsgShowController', function(){
+fcsApp.controller('MsgShowController', ["$scope", function($scope){
 	var ms = this;
+	ms.socket = null;
+	ms.msgs = ["web-socket not init"];
 
-	console.log(ms);
-});
+	ms.open = function(){
+		var url = "ws://localhost:8090/ws/server";
+
+		var socket = new WebSocket(url);
+
+		socket.onopen = function(event){
+			console.log(event);
+		}
+
+		socket.onclose = function(event){
+			console.log(event);
+		}
+
+		socket.onmessage = function(event){
+			console.log(event);
+			ms.msgs.push(JSON.parse(event.data));
+			$scope.$digest();
+		}
+
+		socket.onerror = function(event){
+			console.log(event);
+		};
+		
+		ms.socket = socket;
+		console.log(socket);
+	};
+
+	ms.send = function(){
+		var msg = JSON.stringify(ms.msg);
+		console.log(msg);
+		ms.socket.send(msg);
+	};
+
+	ms.close = function(){
+		ms.socket.close();
+		console.log("close");
+	};
+	
+	//$scope.$digest();
+	console.log(ms, $scope);
+}]);

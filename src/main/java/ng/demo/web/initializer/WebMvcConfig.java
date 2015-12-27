@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import ng.demo.web.Constants;
 import ng.demo.web.handler.DataBindingInitializer;
 import ng.demo.web.interceptor.BaseInterceptor;
 
@@ -29,7 +30,7 @@ import ng.demo.web.interceptor.BaseInterceptor;
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan("ng.demo")
+@ComponentScan(Constants.PACKAGE_SCAN)
 @PropertySource("classpath:config.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 

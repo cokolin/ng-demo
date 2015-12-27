@@ -1,41 +1,28 @@
 package ng.demo.web.initializer;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
-import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 import ng.demo.web.Constants;
-import ng.demo.web.handler.DemoWebSocketHandler;
 
 @Configuration
-@EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+@EnableWebSocketMessageBroker
+@ComponentScan(Constants.PACKAGE_SCAN)
+public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(demoWebSocketHandler(), "/web-socket/demo").addInterceptors(sessionInterceptor());
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		registry.addEndpoint("/ws/server");
 	}
 
-	@Bean
-	public DemoWebSocketHandler demoWebSocketHandler() {
-		return new DemoWebSocketHandler();
+	@Override
+	public void configureMessageBroker(MessageBrokerRegistry registry) {
+		registry.enableSimpleBroker("/ws/topic");
+		registry.setApplicationDestinationPrefixes("/ws/app");
 	}
-
-	@Bean
-	public HttpSessionHandshakeInterceptor sessionInterceptor() {
-		return new HttpSessionHandshakeInterceptor();
-	}
-
-	@Bean
-	public ServletServerContainerFactoryBean createWebSocketContainer() {
-		ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
-		container.setMaxTextMessageBufferSize(Constants.MESSAGE_BUFFER_SIZE);
-		container.setMaxBinaryMessageBufferSize(Constants.MESSAGE_BUFFER_SIZE);
-		return container;
-	}
-
+	
 }

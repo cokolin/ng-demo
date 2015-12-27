@@ -9,6 +9,8 @@ package ng.demo.web;
  * @see
  */
 public final class Constants {
+	
+	public final static String PACKAGE_SCAN = "ng.demo";
 
 	/** 默认编码 */
 	public final static String DEFAULT_CHARSET = "UTF-8";

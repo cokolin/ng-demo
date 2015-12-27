@@ -8,8 +8,4 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-	<absolute-ordering>
-		<name>dispatcher</name>
-	</absolute-ordering>
-
 </web-app>
