@@ -9,8 +9,6 @@ public class MsgVo implements Serializable {
 
 	private String msg;
 
-	private String src;
-
 	public String getUsr() {
 		return usr;
 	}
@@ -27,14 +25,6 @@ public class MsgVo implements Serializable {
 		this.msg = msg;
 	}
 
-	public String getSrc() {
-		return src;
-	}
-
-	public void setSrc(String src) {
-		this.src = src;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -42,8 +32,6 @@ public class MsgVo implements Serializable {
 		builder.append(usr);
 		builder.append(", msg=");
 		builder.append(msg);
-		builder.append(", src=");
-		builder.append(src);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -3,34 +3,15 @@ fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scop
   var mc = this;
   mc.flag = false;
   mc.msgs = [];
-  mc.resp = null;
 
-  var PostConfig = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    transformRequest: function(data){
-      return $.param(data, true);
-    }
-  };
-
-  var call = function(resp){
-    mc.flag = false;
-    mc.resp = resp;
-  };
-
-  function post(url, dat, success, error){
-    $http.post(url, dat).success(success ? success : call).error(error ? error : call);
-    mc.flag = true;
-  }
-
-  function open(dat){
+  function open(name){
     var url = "ws://localhost:8090/ws/demo";
 
     var socket = new WebSocket(url);
 
     socket.onopen = function(event){
       console.log(event);
+      register(name);
     }
 
     socket.onclose = function(event){
@@ -47,46 +28,53 @@ fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scop
       console.log(event);
     };
 
-    mc.socket = socket;
     console.log(socket);
+    return socket;
   }
 
-  function send(msg){
-    mc.socket.send(msg);
+  function register(name){
+    mc.socket.send(JSON.stringify({
+      type: 'REGISTER',
+      data: name
+    }));
   }
 
-  function close(){
+  function send(dat){
+    mc.socket.send(JSON.stringify({
+      type: 'MESSAGE',
+      data: dat
+    }));
+  }
+
+  mc.login = function(){
+    var username = '';
+    for (;username.trim() == '';){
+      username = window.prompt("请输入您的用户名");
+    }
+    if(username){
+      mc.socket = open(username);
+      mc.username = username;
+    }
+  };
+
+  mc.logout = function(){
     if (mc.socket){
       mc.socket.close();
       mc.socket = null;
     }
+    mc.username = null;
     console.log("close socket");
-  }
-
-  mc.login = function(){
-    var dat = {
-      usr: mc.msg.usr
-    };
-    post("/message/set-user", dat, function(resp){
-      mc.flag = false;
-      mc.resp = resp;
-      close();
-      open(dat);
-    });
-  };
-
-  mc.logout = function(){
-    close();
   };
 
   mc.usrMsg = function(){
-    send(JSON.stringify(mc.msg));
+    var dat = angular.copy(mc.msg);
+    send(dat);
   };
 
   mc.allMsg = function(){
     var dat = angular.copy(mc.msg);
     delete dat.usr;
-    send(JSON.stringify(dat));
+    send(dat);
   };
 
   console.log(mc);
