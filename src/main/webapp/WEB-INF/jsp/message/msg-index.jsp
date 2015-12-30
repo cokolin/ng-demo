@@ -32,7 +32,7 @@
 					<div class="form-group text-right">
 						<button type="button" class="btn btn-danger" ng-click="mc.msgs = []">清空消息</button>
 						<button type="button" class="btn btn-primary" ng-click="mc.logout()" ng-disabled="!mc.socket || mc.flag">用户登出</button>
-						<button type="button" class="btn btn-primary" ng-click="mc.login()" ng-disabled="form.usr.$invalid|| mc.socket || mc.flag">用户登录</button>
+						<button type="button" class="btn btn-primary" ng-click="mc.login()" ng-disabled="form.usr.$invalid || mc.socket || mc.flag">用户登录</button>
 					</div>
 				</form>
 			</div>
