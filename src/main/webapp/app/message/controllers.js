@@ -5,7 +5,9 @@ fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scop
   mc.msgs = [];
 
   function open(name){
-    var url = "ws://localhost:8090/ws/demo";
+  	var loc = window.location;
+  	var url = loc.protocol == "https:" ? "wss://" : "ws://";
+  	url += loc.host + "/ws/demo";
 
     var socket = new WebSocket(url);
 
