@@ -1,8 +1,5 @@
 package ng.demo.controller;
 
-import ng.demo.web.handler.DemoWebSocketHandler;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
-
-	@Autowired
-	private DemoWebSocketHandler demoWebSocketHandler;
 
 	@RequestMapping(value = {"", "index"}, method = RequestMethod.GET)
 	public String index() {
