@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PdfController {
 	private final static Logger logger = LogManager.getLogger();
 
-	@RequestMapping("/page")
-	public String page(long id, Model model) {
+	@RequestMapping("/bill")
+	public String bill(long id, Model model) {
+		model.addAttribute("id", id);
+		
 		Random ran = new Random();
 
 		Map<String, Object> data = new HashMap<>();

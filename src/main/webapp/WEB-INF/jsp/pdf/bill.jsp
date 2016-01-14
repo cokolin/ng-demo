@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="/print/pure.css" />
-<link rel="stylesheet" href="/print/print.css" />
-<title>PDF-Test</title>
+<link rel="stylesheet" href="/print/css/pure.css" />
+<link rel="stylesheet" href="/print/css/print.css" />
+<title>账单 - ${id}</title>
 </head>
 <body>
 	<div class="content">
@@ -14,7 +14,7 @@
 				<tr>
 					<td></td>
 					<td><h1>账单</h1></td>
-					<td><img src="/css/imgs/bill_qr_code.png" alt="二维码" /></td>
+					<td><img src="/print/img/bill_qr_code.png" alt="二维码" /></td>
 				</tr>
 			</tbody>
 		</table>
