@@ -9,71 +9,71 @@
 </head>
 <body>
 	<div class="content">
-		<table>
+		<table class="bill-table">
 			<tbody>
 				<tr>
-					<td></td>
-					<td><h1>账单</h1></td>
-					<td><img src="/print/img/bill_qr_code.png" alt="二维码" /></td>
+					<td class="text-left" width="30%"></td>
+					<td class="text-center" width="40%"><h1>账单</h1></td>
+					<td class="text-right" width="30%"><img src="/print/img/bill_qr_code.png" alt="二维码" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<table>
+		<table class="bill-table">
 			<tbody>
-				<tr>
-					<td>${data.title}</td>
-					<td></td>
-					<td><fmt:formatDate value="${data.date}" pattern="yyyy年MM月dd日 HH时mm分ss秒" /></td>
+				<tr class="text-center">
+					<td width="30%">${data.title}</td>
+					<td width="40%"></td>
+					<td width="30%"><fmt:formatDate value="${data.date}" pattern="yyyy年MM月dd日 HH时mm分ss秒" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<table>
+		<table class="pure-table pure-table-bordered bill-table">
 			<thead>
 				<tr>
 					<%-- 共 11 列 --%>
-					<th>#</th>
-					<th>SKU</th>
-					<th>总数量</th>
-					<th>已售量</th>
-					<th>成本单价</th>
-					<th>销售单价</th>
-					<th>销售合计</th>
-					<th>销售利润</th>
-					<th>剩余量</th>
-					<th>结余</th>
-					<th>币种</th>
+					<th class="text-center">#</th>
+					<th class="text-left">SKU</th>
+					<th class="text-center">总数量</th>
+					<th class="text-center">已售量</th>
+					<th class="text-right">成本单价</th>
+					<th class="text-right">销售单价</th>
+					<th class="text-right">销售合计</th>
+					<th class="text-right">销售利润</th>
+					<th class="text-center">剩余量</th>
+					<th class="text-right">结余</th>
+					<th class="text-center">币种</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:if test="${data.list ne null && data.list.size() > 0}">
-					<c:forEach items="${data.list}" step="st" var="it">
+					<c:forEach items="${data.list}" varStatus="st" var="it">
 						<tr>
-							<td>${st.count}</td>
-							<td>${it.sku}</td>
-							<td>${it.qty}</td>
-							<td>${it.sell}</td>
-							<td><fmt:formatNumber value="${it.cost}" pattern=",##0.00" /></td>
-							<td><fmt:formatNumber value="${it.price}" pattern=",##0.00" /></td>
-							<td><fmt:formatNumber value="${it.totalAmt}" pattern=",##0.00" /></td>
-							<td><fmt:formatNumber value="${it.totalFit}" pattern=",##0.00" /></td>
-							<td>${it.remain}</td>
-							<td><fmt:formatNumber value="${it.balance}" pattern=",##0.00" /></td>
-							<td>${data.currency}</td>
+							<td class="text-center">${st.count}</td>
+							<td class="text-left">${it.sku}</td>
+							<td class="text-center">${it.qty}</td>
+							<td class="text-center">${it.sell}</td>
+							<td class="text-right"><fmt:formatNumber value="${it.cost}" pattern=",##0.00" /></td>
+							<td class="text-right"><fmt:formatNumber value="${it.price}" pattern=",##0.00" /></td>
+							<td class="text-right"><fmt:formatNumber value="${it.totalAmt}" pattern=",##0.00" /></td>
+							<td class="text-right"><fmt:formatNumber value="${it.totalFit}" pattern=",##0.00" /></td>
+							<td class="text-center">${it.remain}</td>
+							<td class="text-right"><fmt:formatNumber value="${it.balance}" pattern=",##0.00" /></td>
+							<td class="text-center">${data.currency}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 				<c:if test="${data.list eq null || data.list.size() eq 0}">
 					<tr>
-						<td colspan="11">数据不存在</td>
+						<td colspan="11" class="text-left">数据不存在</td>
 					</tr>
 				</c:if>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="2">合计结余</th>
-					<th colspan="4"></th>
-					<th colspan="4"><fmt:formatNumber value="${data.total}" pattern=",##0.00" /></th>
-					<th>${data.currency}</th>
+					<th colspan="2" class="text-left">合计结余</th>
+					<th colspan="6" class="text-center"></th>
+					<th colspan="2" class="text-right"><fmt:formatNumber value="${data.total}" pattern=",##0.00" /></th>
+					<th class="text-center">${data.currency}</th>
 				</tr>
 			</tfoot>
 		</table>

@@ -32,7 +32,7 @@ public class PdfController {
 		List<Map<String, Object>> list = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			Map<String, Object> map = new HashMap<>();
-			map.put("sku", "SKU" + i);
+			map.put("sku", "SKU-" + i);
 
 			int qty = ran.nextInt(100) + 1;
 			int sell = ran.nextInt(qty);
