@@ -51,7 +51,7 @@ public class CrudController {
 		String fileName = file.getOriginalFilename();
 		File dest = new File("/tmp/", fileName);
 		file.transferTo(dest);
-		return "success";
+		return JsonResp.builder("success").toString();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class CrudController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "query", method = RequestMethod.GET)
-	public JsonResp<List<DemoVo>> query(QueryVo reVo) {
+	public String query(QueryVo reVo) {
 		logger.info(reVo);
 		int length = reVo.getLength();
 		long start = reVo.getPage() * length - 1;
@@ -75,7 +75,7 @@ public class CrudController {
 		}
 
 		long count = 32 * reVo.getLength();
-		return JsonResp.create(list).setCount(count);
+		return JsonResp.builder(list).setCount(count).toString();
 	}
 
 	/**
@@ -90,10 +90,10 @@ public class CrudController {
 	public JsonResp<DemoVo> create(@RequestBody DemoVo vo, BindingResult valid) {
 		logger.info(vo);
 		if (valid.hasErrors()) {
-			return JsonResp.create(400, valid.getAllErrors().toString());
+			return JsonResp.builder(400, valid.getAllErrors().toString());
 		}
 		Random ran = new Random();
-		return JsonResp.create(this.create(ran.nextInt(Integer.MAX_VALUE), ran));
+		return JsonResp.builder(this.create(ran.nextInt(Integer.MAX_VALUE), ran));
 	}
 
 	/**
@@ -103,15 +103,15 @@ public class CrudController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.PUT)
-	public JsonResp<DemoVo> update(@RequestBody DemoVo vo, BindingResult valid) {
+	public String update(@RequestBody DemoVo vo, BindingResult valid) {
 		logger.info(vo);
 		if (valid.hasErrors()) {
-			return JsonResp.create(400, valid.getAllErrors().toString());
+			return JsonResp.builder(400, valid.getAllErrors().toString()).toString();
 		}
 		Random ran = new Random();
 		vo.setUpdateBy("UpdateUser" + ran.nextInt(1234));
 		vo.setUpdateTime(new Date(ran.nextInt(Integer.MAX_VALUE) * 8L + 1430000000000L));
-		return JsonResp.create(vo);
+		return JsonResp.builder(vo).toString();
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class CrudController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "delete", method = RequestMethod.DELETE)
-	public JsonResp<Integer> delete(@RequestBody QueryVo reVo) {
+	public String delete(@RequestBody QueryVo reVo) {
 		logger.info(reVo);
-		return JsonResp.create(reVo.getIds().size());
+		return JsonResp.builder(reVo.getIds().size()).toString();
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class CrudController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public JsonResp<DemoVo> get(@PathVariable("id") long id) {
-		return JsonResp.create(this.create(id, new Random()));
+	public String get(@PathVariable("id") long id) {
+		return JsonResp.builder(this.create(id, new Random())).toString();
 	}
 
 	private DemoVo create(long id, Random ran) {

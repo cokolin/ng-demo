@@ -6,11 +6,11 @@
 <link href="${basePath}/css/bill-print.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 @page {
-	size: 210mm 297mm;
+	size: 297mm 210mm;
 }
 
 .content {
-	width: 190mm;
+	width: 277mm;
 	margin: 0 auto;
 }
 </style>
