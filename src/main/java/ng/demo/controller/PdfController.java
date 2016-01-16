@@ -52,22 +52,10 @@ public class PdfController {
 	public void create(long id, Integer inline, Integer download, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		logger.info("bill id {}", id);
 		String url = "/pdf/bill.do?id=" + id;
-		this.create(url, id, inline != null && inline.intValue() > 0, download != null && download.intValue() > 0, req, resp);
-	}
-
-	@RequestMapping("/create-horiz")
-	public void createHoriz(long id, Integer inline, Integer download, HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		logger.info("bill id {}", id);
-		String url = "/pdf/bill-horiz.do?id=" + id;
-		this.create(url, id, inline != null && inline.intValue() > 0, download != null && download.intValue() > 0, req, resp);
-	}
-
-	private void create(String url, long id, boolean inline, boolean download, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		InputStream src = PdfKit.getHtmlInputStream(url, req, resp);
-
-		if (inline) {// 浏览器中显示
+		if (inline != null && inline.intValue() > 0) {// 浏览器中显示
 			resp.setContentType("application/pdf");
-			if (download) {
+			if (download != null && download.intValue() > 0) {
 				resp.setHeader("Content-Disposition", "attachment;filename=bill-" + id + ".pdf");
 			}
 			try (ServletOutputStream out = resp.getOutputStream()) {
@@ -78,6 +66,36 @@ public class PdfController {
 			File file = new File("/apps/logs/bill-" + id + ".pdf");
 			try (OutputStream out = new FileOutputStream(file)) {
 				PdfKit.buildPdf(src, out, PdfKit.OWNER_PASSWORD);
+				resp.getWriter().write(JsonResp.builder(file.getAbsolutePath()).toString());
+				resp.flushBuffer();
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+				if (!resp.isCommitted()) {
+					resp.getWriter().write(JsonResp.builder(500, e.getMessage()).toString());
+					resp.flushBuffer();
+				}
+			}
+		}
+	}
+
+	@RequestMapping("/create-horiz")
+	public void createHoriz(long id, Integer inline, Integer download, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		logger.info("bill id {}", id);
+		String url = "/pdf/bill-horiz.do?id=" + id;
+		InputStream src = PdfKit.getHtmlInputStream(url, req, resp);
+		if (inline != null && inline.intValue() > 0) {// 浏览器中显示
+			resp.setContentType("application/pdf");
+			if (download != null && download.intValue() > 0) {
+				resp.setHeader("Content-Disposition", "attachment;filename=bill-" + id + ".pdf");
+			}
+			try (ServletOutputStream out = resp.getOutputStream()) {
+				PdfKit.buildHorizPdf(src, out, PdfKit.OWNER_PASSWORD);
+			}
+		} else {// 输出到文件
+			resp.setContentType("application/json");
+			File file = new File("/apps/logs/bill-" + id + ".pdf");
+			try (OutputStream out = new FileOutputStream(file)) {
+				PdfKit.buildHorizPdf(src, out, PdfKit.OWNER_PASSWORD);
 				resp.getWriter().write(JsonResp.builder(file.getAbsolutePath()).toString());
 				resp.flushBuffer();
 			} catch (Exception e) {

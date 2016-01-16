@@ -20,6 +20,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
@@ -30,7 +31,7 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
  *
  */
 public class PdfKit {
-	public static final byte[] OWNER_PASSWORD = "0w&eR@2o16".getBytes();
+	public static final byte[] OWNER_PASSWORD = "0w&eR@2o16P~D".getBytes();
 
 	/**
 	 * build PDF to OutputStream
@@ -40,8 +41,8 @@ public class PdfKit {
 	 * @throws DocumentException
 	 * @throws IOException
 	 */
-	public static void buildPdf(InputStream src, OutputStream out) throws DocumentException, IOException {
-		buildPdf(src, out, null, null);
+	public static void buildPdf(InputStream src, OutputStream out) throws Exception {
+		buildPdf(src, out, null);
 	}
 
 	/**
@@ -53,13 +54,47 @@ public class PdfKit {
 	 * @throws DocumentException
 	 * @throws IOException
 	 */
-	public static void buildPdf(InputStream src, OutputStream out, byte[] ownerPwd)
-			throws DocumentException, IOException {
-		buildPdf(src, out, null, ownerPwd);
+	public static void buildPdf(InputStream src, OutputStream out, byte[] ownerPwd) throws Exception {
+		buildPdf(src, out, ownerPwd, null);
 	}
 
 	/**
 	 * build PDF to OutputStream with encrypt
+	 * 
+	 * @param src
+	 * @param out
+	 * @param ownerPwd
+	 * @param userPwd
+	 * @throws Exception
+	 */
+	public static void buildPdf(InputStream src, OutputStream out, byte[] ownerPwd, byte[] userPwd) throws Exception {
+		buildPdf(PageSize.A4, src, out, ownerPwd, userPwd);// A4 纸，纵向
+	}
+
+	/**
+	 * build horizontal PDF
+	 * 
+	 * @param src
+	 * @param out
+	 * @throws Exception
+	 */
+	public static void buildHorizPdf(InputStream src, OutputStream out) throws Exception {
+		buildHorizPdf(src, out, null);
+	}
+
+	/**
+	 * build horizontal PDF to OutputStream with encrypt
+	 * 
+	 * @param src
+	 * @param out
+	 * @throws Exception
+	 */
+	public static void buildHorizPdf(InputStream src, OutputStream out, byte[] ownerPwd) throws Exception {
+		buildHorizPdf(src, out, ownerPwd, null);
+	}
+
+	/**
+	 * build horizontal PDF to OutputStream with encrypt
 	 * 
 	 * @param src
 	 * @param out
@@ -68,13 +103,26 @@ public class PdfKit {
 	 * @throws DocumentException
 	 * @throws IOException
 	 */
-	public static void buildPdf(InputStream src, OutputStream out, byte[] userPwd, byte[] ownerPwd)
-			throws DocumentException, IOException {
-		Document doc = new Document(PageSize.A4, 28, 28, 28, 28);// A4 纸，边距的单位是 pt，72pt = 1 英吋，28pt ≈ 1 厘米
-		
+	public static void buildHorizPdf(InputStream src, OutputStream out, byte[] ownerPwd, byte[] userPwd) throws Exception {
+		buildPdf(PageSize.A4.rotate(), src, out, ownerPwd, userPwd);// A4 纸，横向
+	}
+
+	/**
+	 * build PDF to OutputStream with encrypt
+	 * 
+	 * @param pageSize
+	 * @param src
+	 * @param out
+	 * @param ownerPwd
+	 * @param userPwd
+	 * @throws Exception
+	 */
+	public static void buildPdf(Rectangle pageSize, InputStream src, OutputStream out, byte[] ownerPwd, byte[] userPwd) throws Exception {
+		Document doc = new Document(pageSize, 28, 28, 28, 28);// 边距的单位是 pt，72pt = 1 英吋，28pt ≈ 1 厘米
+
 		PdfWriter writer = PdfWriter.getInstance(doc, out);
 
-		if (ownerPwd != null) {//必须先有 ownerPwd 才能使用 userPwd
+		if (ownerPwd != null) {// 必须先有 ownerPwd 才能使用 userPwd
 			writer.setEncryption(userPwd, ownerPwd, PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
 		}
 
@@ -102,8 +150,7 @@ public class PdfKit {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public static InputStream getHtmlInputStream(String path, HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	public static InputStream getHtmlInputStream(String path, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try (ByteArrayOutputStream os = getHtmlOutputStream(path, req, resp)) {
 			System.out.println(os.toString());
 			return new ByteArrayInputStream(os.toByteArray());
@@ -120,8 +167,7 @@ public class PdfKit {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public static ByteArrayOutputStream getHtmlOutputStream(String path, HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	public static ByteArrayOutputStream getHtmlOutputStream(String path, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
 		try (OutputStreamWriter writer = new OutputStreamWriter(os); PrintWriter pw = new PrintWriter(writer)) {

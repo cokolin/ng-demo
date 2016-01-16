@@ -1,17 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@taglib prefix="fmt"
+	uri="http://java.sun.com/jsp/jstl/fmt"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${basePath}/css/bill-print.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
+<style type="text/css" media="screen">
+.content {
+	width: 277mm; margin: 0 auto;
+}
+</style>
+<style type="text/css" media="print">
 @page {
-	size: 297mm 210mm;
+	size: A4 landscape;
 }
 
 .content {
-	width: 277mm;
-	margin: 0 auto;
+	width: 100%; margin: 0 auto;
 }
 </style>
 <title>账单 - ${id}</title>
@@ -22,7 +27,8 @@
 			<tbody>
 				<tr class="bill-head">
 					<td class="text-left" width="20%"><img class="bill-img" src="${basePath}/css/img/bill_qr_code.png" alt="静态二维码" /></td>
-					<td class="text-center" width="60%"><h2>主标题</h2><h3>副标题</h3></td>
+					<td class="text-center" width="60%"><h2>主标题</h2>
+						<h3>副标题</h3></td>
 					<td class="text-right" width="20%"><img class="bill-img" src="${basePath}/pdf/image?id=${id}" alt="动态二维码" /></td>
 				</tr>
 			</tbody>
@@ -56,7 +62,7 @@
 			<tbody class="bill-table-sm">
 				<c:if test="${data.list ne null && data.list.size() > 0}">
 					<c:forEach items="${data.list}" varStatus="st" var="it">
-						<tr<c:if test="${st.index % 2 eq 1}"> class="bg-active"</c:if>>
+						<tr <c:if test="${st.index % 2 eq 1}"> class="bg-active"</c:if>>
 							<td class="text-center">${st.count}</td>
 							<td class="text-left">${it.sku}</td>
 							<td class="text-center">${it.qty}</td>
@@ -78,7 +84,7 @@
 				</c:if>
 			</tbody>
 			<tfoot>
-				<tr<c:if test="${data.list ne null && data.list.size() % 2 eq 1}"> class="bg-active"</c:if>>
+				<tr <c:if test="${data.list ne null && data.list.size() % 2 eq 1}"> class="bg-active"</c:if>>
 					<th class="text-center" colspan="2">合计结余</th>
 					<th class="text-center" colspan="6">备注内容</th>
 					<th class="text-right" colspan="2"><fmt:formatNumber value="${data.total}" pattern=",##0.00" /></th>
