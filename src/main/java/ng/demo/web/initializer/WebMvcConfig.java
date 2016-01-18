@@ -1,10 +1,16 @@
 package ng.demo.web.initializer;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.apache.tomcat.jdbc.pool.PoolProperties;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -30,6 +36,7 @@ import ng.demo.web.interceptor.BaseInterceptor;
  */
 @EnableWebMvc
 @Configuration
+@MapperScan(Constants.PACKAGE_SCAN)
 @ComponentScan(Constants.PACKAGE_SCAN)
 @PropertySource("classpath:config.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -67,5 +74,44 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+
+	@Bean
+	public DataSource dataSource() {
+		PoolProperties p = new PoolProperties();
+		p.setUrl("jdbc:mysql://localhost:3306/demo?characterEncoding=utf8&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull");
+		p.setDriverClassName("com.mysql.jdbc.Driver");
+		p.setUsername("root");
+		p.setPassword("1234");
+		p.setJmxEnabled(true);
+		p.setTestWhileIdle(false);
+		p.setTestOnBorrow(true);
+		p.setValidationQuery("SELECT 1");
+		p.setValidationInterval(30000);
+		p.setTestOnReturn(false);
+		p.setTimeBetweenEvictionRunsMillis(30000);
+		p.setMaxActive(100);
+		p.setInitialSize(10);
+		p.setMaxWait(10000);
+		p.setRemoveAbandonedTimeout(60);
+		p.setMinEvictableIdleTimeMillis(30000);
+		p.setMinIdle(10);
+		p.setLogAbandoned(true);
+		p.setRemoveAbandoned(true);
+		p.setJdbcInterceptors("org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"
+				+ "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
+		return new DataSource(p);
+	}
+	
+	@Bean
+	public DataSourceTransactionManager transactionManager(){
+		return new DataSourceTransactionManager(dataSource());
+	}
+	
+	@Bean
+  public SqlSessionFactory sqlSessionFactory() throws Exception {
+    SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+    sqlSessionFactory.setDataSource(dataSource());
+    return sqlSessionFactory.getObject();
+  }
 
 }

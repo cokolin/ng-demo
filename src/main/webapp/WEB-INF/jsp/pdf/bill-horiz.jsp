@@ -7,12 +7,12 @@
 <link href="${basePath}/css/bill-print.css" rel="stylesheet" type="text/css" />
 <style type="text/css" media="screen">
 .content {
-	width: 190mm; margin: 0 auto;
+	width: 277mm; margin: 0 auto;
 }
 </style>
 <style type="text/css" media="print">
 @page {
-	size: A4 portrait;
+	size: A4 landscape;
 }
 
 .content {
