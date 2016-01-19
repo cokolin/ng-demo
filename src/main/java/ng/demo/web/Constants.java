@@ -1,5 +1,7 @@
 package ng.demo.web;
 
+import java.nio.charset.Charset;
+
 /**
  * 常量类
  * 
@@ -14,6 +16,8 @@ public final class Constants {
 
 	/** 默认编码 */
 	public final static String DEFAULT_CHARSET = "UTF-8";
+	
+	public final static Charset UTF_8 = Charset.forName(DEFAULT_CHARSET);
 
 	/** 消息的缓存大小 */
 	public final static int MESSAGE_BUFFER_SIZE = 8 * 1024;

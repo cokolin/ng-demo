@@ -13,7 +13,6 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import ng.demo.kit.PdfKit;
 import ng.demo.kit.WebKit;
 import ng.demo.web.filter.BaseFilter;
 
@@ -31,8 +30,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	private void beforeInitializer() {
 		logger.info("Befor initializer Spring web mvc...");
 		this.threadInitializer();
-//		this.addBaseFilter();
-//		this.addHiddenHttpMethodFilter();
 	}
 
 	private void afterInitializer() {
@@ -71,12 +68,12 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { WebMvcConfig.class, WebSocketConfig.class };
+		return new Class[] {WebMvcConfig.class, WebSocketConfig.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		return new String[] {"/"};
 	}
 
 	@Override
@@ -94,7 +91,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 			public void run() {
 				addBaseFilter();
 				addHiddenHttpMethodFilter();
-				PdfKit.registFonts(servletContext);
 			}
 		}).start();
 	}

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="${basePath}/css/bill-print.css" rel="stylesheet" type="text/css" />
+<link href="/css/bill-print.css" rel="stylesheet" type="text/css" />
 <style type="text/css" media="screen">
 .content {
 	width: 190mm; margin: 0 auto;
@@ -26,10 +26,10 @@
 		<table class="wrap-table">
 			<tbody>
 				<tr class="bill-head">
-					<td class="text-left" width="20%"><img class="bill-img" src="${basePath}/css/img/bill_qr_code.png" alt="静态二维码" /></td>
+					<td class="text-left" width="20%"><img class="bill-img" src="/css/img/bill_qr_code.png" alt="静态二维码" /></td>
 					<td class="text-center" width="60%"><h2>主标题</h2>
 						<h3>副标题</h3></td>
-					<td class="text-right" width="20%"><img class="bill-img" src="${basePath}/pdf/image?id=${id}" alt="动态二维码" /></td>
+					<td class="text-right" width="20%"><img class="bill-img" src="/pdf/image?id=${id}" alt="动态二维码" /></td>
 				</tr>
 			</tbody>
 		</table>
