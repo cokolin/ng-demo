@@ -4,8 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>主页</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="/libs/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+<link href="/static/libs/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
@@ -14,8 +15,8 @@
 			<div class="col-xs-12">
 				<ul>
 					<li><a href="/">主页</a></li>
-					<li><a href="/libs/angular/1.2.29/docs/index.html" target="_blank">AngularJS 1.2.29 API</a></li>
-					<li><a href="/libs/angular/1.4.8/docs/index.html" target="_blank">AngularJS 1.4.8 API</a></li>
+					<li><a href="/static/libs/angular/1.2.29/docs/index.html" target="_blank">AngularJS 1.2.29 API</a></li>
+					<li><a href="/static/libs/angular/1.4.8/docs/index.html" target="_blank">AngularJS 1.4.8 API</a></li>
 					<li><a href="/crud" target="_blank">AngularJS 1.4 CURD示例</a></li>
 					<li><a href="/message" target="_blank">Message 发送示例</a></li>
 					<li></li>

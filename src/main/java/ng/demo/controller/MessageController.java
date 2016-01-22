@@ -15,7 +15,7 @@ public class MessageController {
 
 	@RequestMapping(value = {"", "index"}, method = RequestMethod.GET)
 	public String index() {
-		return "message/msg-index";
+		return "message/message";
 	}
 
 	@RequestMapping(value = "show", method = RequestMethod.GET)

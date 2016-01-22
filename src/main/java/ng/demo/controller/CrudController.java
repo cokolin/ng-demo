@@ -35,7 +35,7 @@ public class CrudController {
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index() {
-		return "crud/curd-index";
+		return "crud/curd";
 	}
 
 	/**
