@@ -1,8 +1,8 @@
 package ng.demo.model;
 
-import java.io.Serializable;
+import ng.demo.base.BaseModel;
 
-public class DemoInfo implements Serializable {
+public class DemoInfo extends BaseModel {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -25,14 +25,4 @@ public class DemoInfo implements Serializable {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DemoInfo [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append("]");
-		return builder.toString();
-	}
 }

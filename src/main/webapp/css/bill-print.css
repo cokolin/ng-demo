@@ -167,6 +167,10 @@ h3 {
 	font-size: 18px;
 }
 
+.content {
+	margin: 0 auto;
+}
+
 .bill-img {
 	max-width: 100%; height: auto;
 }

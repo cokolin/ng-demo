@@ -1,15 +1,16 @@
 package ng.demo.vo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import ng.demo.base.BaseModel;
 
 /**
  * 
  * @author cokolin
  *
  */
-public class DemoVo implements Serializable {
+public class DemoVo extends BaseModel {
 	private static final long serialVersionUID = 1L;
 
 	/** 主键 */
@@ -131,35 +132,6 @@ public class DemoVo implements Serializable {
 
 	public void setDeleted(Byte deleted) {
 		this.deleted = deleted;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DemoVo [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", remark=");
-		builder.append(remark);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", price=");
-		builder.append(price);
-		builder.append(", quantity=");
-		builder.append(quantity);
-		builder.append(", discount=");
-		builder.append(discount);
-		builder.append(", updateBy=");
-		builder.append(updateBy);
-		builder.append(", updateTime=");
-		builder.append(updateTime);
-		builder.append(", deleted=");
-		builder.append(deleted);
-		builder.append("]");
-		return builder.toString();
 	}
 
 }

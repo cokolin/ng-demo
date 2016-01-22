@@ -5,18 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="/css/bill-print.css" rel="stylesheet" type="text/css" />
-<style type="text/css" media="screen">
-.content {
-	width: 190mm; margin: 0 auto;
-}
-</style>
-<style type="text/css" media="print">
+<style type="text/css">
 @page {
 	size: A4 portrait;
+	margin: 1cm;
 }
 
 .content {
-	width: 100%; margin: 0 auto;
+	width: 100%;
+}
+
+@media screen {
+	.content {
+		width: 19cm;
+	}
 }
 </style>
 <title>账单 - ${id}</title>

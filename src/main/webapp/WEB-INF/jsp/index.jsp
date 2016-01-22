@@ -23,7 +23,6 @@
 					<li><a href="/pdf/create?id=101" target="_blank">竖向PDF查看</a></li>
 					<li><a href="/pdf/create?id=101&download=1" target="_blank">竖向PDF下载</a></li>
 					<li></li>
-					<li></li>
 					<li><a href="/pdf/bill-horiz?id=202" target="_blank">横向PDF页面</a></li>
 					<li><a href="/pdf/create?id=202" target="_blank">横向PDF查看</a></li>
 					<li><a href="/pdf/create?id=202&download=1" target="_blank">横向PDF下载</a></li>
