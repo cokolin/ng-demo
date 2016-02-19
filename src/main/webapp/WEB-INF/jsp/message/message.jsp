@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html ng-app='fcsApp'>
+<html ng-app='ngApp'>
 <head>
 <meta charset="UTF-8">
 <title>消息示例</title>
@@ -38,7 +38,7 @@
 			<div class="col-xs-12">当前用户：{{mc.username}}</div>
 		</div>
 	</div>
-	<script src="/static/libs/jquery/2.1.1/jquery.js"></script>
+	<script src="/static/libs/jquery/1.2.0/jquery.js"></script>
 	<script src="/static/libs/angular/1.4.8/angular.js"></script>
 	<script src="/app/base.js"></script>
 	<script src="/app/message/controllers.js"></script>
