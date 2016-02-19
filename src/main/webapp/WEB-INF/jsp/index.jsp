@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/static/libs/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-<link href="/css/base.css" rel="stylesheet">
+<link href="/static/css/base.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
