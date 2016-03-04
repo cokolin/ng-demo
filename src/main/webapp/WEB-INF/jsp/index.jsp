@@ -29,6 +29,8 @@
 					<li><a href="/pdf/create?id=202&download=1" target="_blank">横向PDF下载</a></li>
 					<li></li>
 					<li><a href="/pdf/create-file?num=100" target="_blank">PDF生成测试</a></li>
+					<li></li>
+					<li><a href="/template" target="_blank">模板页面生成测试</a></li>
 				</ul>
 			</div>
 		</div>

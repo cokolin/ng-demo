@@ -1,9 +1,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html ng-app='fcsApp'>
+<html ng-app='ngApp'>
 <head>
 <meta charset="UTF-8">
-<title>消息示例</title>
+<title>${tmpl.title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/static/libs/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <link href="/static/css/base.css" rel="stylesheet">

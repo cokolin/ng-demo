@@ -1,5 +1,5 @@
 'use strict';
-ngApp.controller('MessageController', ['$http', '$scope', function($http, $scope){
+fcsApp.controller('MessageController', ['$http', '$scope', function($http, $scope){
   var mc = this;
   mc.flag = false;
   mc.msgs = [];

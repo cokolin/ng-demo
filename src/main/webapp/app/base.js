@@ -1,3 +1,3 @@
-var ngApp = angular.module('ngApp', []);
+var fcsApp = angular.module('fcsApp', []);
 var $AE = angular.element;
 var $A = angular;
