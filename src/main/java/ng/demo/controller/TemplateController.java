@@ -4,6 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ng.demo.vo.usual.TemplateVo;
+import ng.demo.vo.usual.enums.BaseType;
+import ng.demo.vo.usual.enums.ButtonType;
+import ng.demo.vo.usual.enums.FormType;
+import ng.demo.vo.usual.enums.InputType;
+import ng.demo.vo.usual.enums.ModuleType;
+import ng.demo.vo.usual.enums.TBodyType;
+import ng.demo.vo.usual.enums.THeadType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,6 +47,27 @@ public class TemplateController {
 			map.put(vo.getCode(), vo);
 			return pages();
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping("types")
+	public Object types() {
+		Map<String, Map<String, String>> cfgs = new HashMap<>();
+		cfgs.put("button", getTypeMap(ButtonType.values()));
+		cfgs.put("form", getTypeMap(FormType.values()));
+		cfgs.put("input", getTypeMap(InputType.values()));
+		cfgs.put("module", getTypeMap(ModuleType.values()));
+		cfgs.put("tbody", getTypeMap(TBodyType.values()));
+		cfgs.put("thead", getTypeMap(THeadType.values()));
+		return cfgs;
+	}
+
+	private Map<String, String> getTypeMap(BaseType[] types) {
+		Map<String, String> map = new HashMap<>(types.length);
+		for (BaseType type : types) {
+			map.put(type.getKey(), type.getValue());
+		}
+		return map;
 	}
 
 	@ResponseBody

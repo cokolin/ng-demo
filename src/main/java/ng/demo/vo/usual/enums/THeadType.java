@@ -1,16 +1,11 @@
 package ng.demo.vo.usual.enums;
 
+public enum THeadType implements BaseType {
+	TEXT("文本"), BUTTON("按钮");
 
-public enum ButtonType implements BaseType {
-	SUBMIT("提交按钮"),
-	
-	BUTTON("普通按钮"),
-	
-	RESET("重置按钮");
-	
 	private String value;
-	
-	private ButtonType(String value){
+
+	private THeadType(String value) {
 		this.value = value;
 	}
 
@@ -23,5 +18,4 @@ public enum ButtonType implements BaseType {
 	public String getKey() {
 		return this.name();
 	}
-
 }

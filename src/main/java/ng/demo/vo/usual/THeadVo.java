@@ -1,12 +1,12 @@
 package ng.demo.vo.usual;
 
-import ng.demo.vo.usual.enums.THeaderType;
+import ng.demo.vo.usual.enums.THeadType;
 
 public class THeadVo extends Element {
 	private static final long serialVersionUID = -3171539941509331999L;
 
 	/** 类型 */
-	private THeaderType type;
+	private THeadType type;
 
 	/** 按钮 */
 	private ButtonVo btn;
@@ -15,16 +15,16 @@ public class THeadVo extends Element {
 		super();
 	}
 
-	public THeadVo(THeaderType type, String name, String clas) {
+	public THeadVo(THeadType type, String name, String clas) {
 		super(name, clas);
 		this.type = type;
 	}
 
-	public THeaderType getType() {
+	public THeadType getType() {
 		return type;
 	}
 
-	public void setType(THeaderType type) {
+	public void setType(THeadType type) {
 		this.type = type;
 	}
 

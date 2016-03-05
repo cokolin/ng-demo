@@ -1,6 +1,6 @@
 package ng.demo.vo.usual.enums;
 
-public enum InputType {
+public enum InputType implements BaseType {
 	STATIC("静态数据"),
 	
 	TEXT("文本输入"),
@@ -15,13 +15,19 @@ public enum InputType {
 	
 	RADIO("单选框");
 
-	private String chs;
+	private String value;
 
-	private InputType(String chs) {
-		this.chs = chs;
+	private InputType(String value) {
+		this.value = value;
 	}
 
-	public String getChs() {
-		return chs;
+	@Override
+	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public String getKey() {
+		return this.name();
 	}
 }

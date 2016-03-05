@@ -19,14 +19,13 @@ public class TBodyVo extends Element {
 
 	public TBodyVo() {
 		super();
+		this.btns = new ArrayList<>(4);
 	}
 
 	public TBodyVo(TBodyType type, String name, String clas) {
 		super(name, clas);
 		this.type = type;
-		if(TBodyType.BUTTONS.equals(type)){
-			this.btns = new ArrayList<>(4);
-		}
+		this.btns = new ArrayList<>(4);
 	}
 
 	public TBodyType getType() {

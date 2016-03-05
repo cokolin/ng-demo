@@ -8,7 +8,7 @@ import ng.demo.base.BaseModel;
 public class TemplateVo extends BaseModel {
 	private static final long serialVersionUID = 5076148256777417139L;
 	
-	/** 页面 */
+	/** 代码 */
 	private String code;
 	
 	/** 页面 */
@@ -24,11 +24,11 @@ public class TemplateVo extends BaseModel {
 	private String controller;
 
 	/** 表单内容项 */
-	private List<ShellVo> shells;
+	private List<ModuleVo> modules;
 
 	public TemplateVo() {
 		super();
-		this.shells = new ArrayList<>(4);
+		this.modules = new ArrayList<>(4);
 	}
 
 	public String getCode() {
@@ -71,16 +71,16 @@ public class TemplateVo extends BaseModel {
 		this.controller = controller;
 	}
 
-	public List<ShellVo> getShells() {
-		return shells;
+	public List<ModuleVo> getModules() {
+		return modules;
 	}
 
-	public void setShells(List<ShellVo> shells) {
-		this.shells = shells;
+	public void setModules(List<ModuleVo> modules) {
+		this.modules = modules;
 	}
 
-	public boolean addShell(ShellVo shell) {
-		return this.shells.add(shell);
+	public boolean addModules(ModuleVo module) {
+		return this.modules.add(module);
 	}
 
 }
