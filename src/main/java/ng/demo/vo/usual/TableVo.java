@@ -10,18 +10,18 @@ public class TableVo extends Element {
 	private List<THeadVo> theads;
 
 	/** 表格的列表项 */
-	private List<TBodyVo> tbodys;
+	private List<TBodyVo> tbodies;
 
 	public TableVo() {
 		super();
 		this.theads = new ArrayList<>(4);
-		this.tbodys = new ArrayList<>(4);
+		this.tbodies = new ArrayList<>(4);
 	}
 
 	public TableVo(String name, String clas) {
 		super(name, clas);
 		this.theads = new ArrayList<>(4);
-		this.tbodys = new ArrayList<>(4);
+		this.tbodies = new ArrayList<>(4);
 	}
 
 	public List<THeadVo> getTheads() {
@@ -32,21 +32,20 @@ public class TableVo extends Element {
 		this.theads = theads;
 	}
 
-	public List<TBodyVo> getTbodys() {
-		return tbodys;
+	public List<TBodyVo> getTbodies() {
+		return tbodies;
 	}
 
-	public void setTbodys(List<TBodyVo> tbodys) {
-		this.tbodys = tbodys;
+	public void setTbodies(List<TBodyVo> tbodies) {
+		this.tbodies = tbodies;
 	}
-
 
 	public boolean addThead(THeadVo thead) {
 		return this.theads.add(thead);
 	}
 
 	public boolean addTbody(TBodyVo tbody) {
-		return this.tbodys.add(tbody);
+		return this.tbodies.add(tbody);
 	}
 
 }

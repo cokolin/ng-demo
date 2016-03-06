@@ -57,8 +57,8 @@ public class TemplateController {
 		cfgs.put("form", getTypeMap(FormType.values()));
 		cfgs.put("input", getTypeMap(InputType.values()));
 		cfgs.put("module", getTypeMap(ModuleType.values()));
-		cfgs.put("tbody", getTypeMap(TBodyType.values()));
 		cfgs.put("thead", getTypeMap(THeadType.values()));
+		cfgs.put("tbody", getTypeMap(TBodyType.values()));
 		return cfgs;
 	}
 

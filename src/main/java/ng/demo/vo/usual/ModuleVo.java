@@ -11,9 +11,12 @@ public class ModuleVo extends Element {
 	/** 表单 */
 	private FormVo form;
 
+	/** 规格 */
+	private String size;
+
 	/** 表格 */
 	private TableVo table;
-	
+
 	/** 按钮行的样式类 */
 	private String btnColClas;
 
@@ -34,6 +37,14 @@ public class ModuleVo extends Element {
 
 	public void setForm(FormVo form) {
 		this.form = form;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 	public TableVo getTable() {

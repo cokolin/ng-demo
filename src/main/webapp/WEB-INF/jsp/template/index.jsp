@@ -4,12 +4,12 @@
 <head>
 <%@include file="include/head.jsp"%>
 <style type="text/css">
-.form-module {
-	/* border-top: 1px solid #888; */
+.table, .list-inline {
+	margin-bottom: 0;
 }
 </style>
 <script src="/app/template/controllers.js"></script>
-<title>模板页面生成测试</title>
+<title>生成模板页面</title>
 </head>
 <body>
 	<div class="container-fluid" data-ng-controller="TemplateController as tc">
@@ -45,7 +45,7 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-xs-12 col-sm-8">
+			<div class="col-xs-12">
 				<form name="tmplForm" class="form-horizontal">
 					<fieldset data-ng-disabled="!tc.tmpl">
 						<div class="col-xs-12 col-sm-6">
@@ -103,11 +103,11 @@
 								</div>
 							</div>
 						</div>
-						<%@include file="include/module.jsp" %>
+						<%@include file="include/module.jsp"%>
 					</fieldset>
 				</form>
 			</div>
-			<div class="col-xs-12 col-sm-4">
+			<div class="col-xs-12">
 				<h4>模板的基本属性</h4>
 				<ul>
 					<li data-ng-if="tc.tmpl.code">{{tc.tmpl.code}} {{tc.tmpl.title}}</li>
@@ -129,12 +129,12 @@
 							<li>表格：</li>
 							<li>表格头：
 								<ul data-ng-if="module.table.theads">
-									<li data-ng-repeat="thead in module.table.theads">{{thead.type}}，{{thead.name}}</li>
+									<li data-ng-repeat="th in module.table.theads">{{th.type}}，{{th.name}}</li>
 								</ul>
 							</li>
 							<li>表格项：
-								<ul data-ng-if="module.table.tbodys">
-									<li data-ng-repeat="tbody in module.table.tbodys">{{tbody.type}}，{{tbody.name}}</li>
+								<ul data-ng-if="module.table.tbodies">
+									<li data-ng-repeat="td in module.table.tbodies">{{td.type}}，{{td.name}}</li>
 								</ul>
 							</li>
 						</ul>
@@ -142,7 +142,8 @@
 				</ul>
 			</div>
 		</div>
-		<%@include file="include/attr.jsp" %>
+		<%@include file="include/button.jsp"%>
+		<%@include file="include/attr.jsp"%>
 	</div>
 </body>
 </html>

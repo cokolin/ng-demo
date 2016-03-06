@@ -32,12 +32,16 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<div class="col-xs-4">
-							<div class="checkbox">
-								<label><input type="checkbox" data-ng-model="module.pagination"> 包含分页组件</label>
-							</div>
+						<label for="" class="col-xs-3 control-label">组件规格</label>
+						<div class="col-xs-9">
+							<input type="text" class="form-control" name="module_size" data-ng-model="module.size" placeholder="组件的规格，例如：modal-lg" maxlength="80">
 						</div>
-						<ul class="list-inline text-right col-xs-8">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label for="" class="col-xs-3 control-label">组件项目</label>
+						<ul class="list-inline col-xs-9">
 							<li>
 								<div class="btn-group" role="group">
 									<button type="button" data-ng-disabled="module.form" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -54,10 +58,15 @@
 							<li>
 								<button type="button" class="btn btn-warning" data-ng-click="tc.addAttr(module)">添加属性</button>
 							</li>
+							<li>
+								<div class="checkbox">
+									<label><input type="checkbox" data-ng-model="module.pagination"> 包含分页组件</label>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-xs-12" data-ng-if="module.attrs && module.attrs.length > 0">
+				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
 						<ul class="list-inline text-right col-xs-12">
 							<li data-ng-repeat="attr in module.attrs">

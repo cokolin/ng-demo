@@ -4,5 +4,5 @@
 <link href="/static/css/base.css" rel="stylesheet">
 <script src="/static/libs/jquery/1.2.0/jquery.js"></script>
 <script src="/static/libs/bootstrap/3.3.6/js/bootstrap.js"></script>
-<script src="/static/libs/angular/1.4.8/angular.js"></script>
+<script src="/static/libs/angular/1.2.29/angular.js"></script>
 <script src="/app/base.js"></script>
