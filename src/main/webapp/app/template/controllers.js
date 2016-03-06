@@ -190,16 +190,27 @@
 	function TemplateController($http, $scope){
 		var tc = this;
 
-		tc.addFlag = false;// 是否新增的标志
+		tc.attr = null;// 属性项编辑的对象
+		tc.addAttrFlag = false;// 是否新增属性标志
+		var attrSrc, attrIdx;// 属性相关
 
 		tc.ipt = null;// 表单项编辑的对象
+		tc.addIptFlag = false;// 是否新增表单项的标志
 		var iptSrc, iptIdx;// 表单项相关
 
 		tc.btn = null;// 按钮项编辑的对象
-		var btnSrc, btnIdx;// 按钮项相关
+		tc.addBtnFlag = false;// 是否新增按钮项的标志
+		var btnSrc, btnIdx, btnSaveCall;// 按钮项相关
 
-		tc.attrAddFlag = false;// 是否新增属性标志
-		var attrSrc, attrIdx;// 属性相关
+		tc.th = null;// 表格头编辑的对象
+		tc.thIndex = 0;// 表格头序号
+		tc.addThFlag = false;// 是否新增表格头的标志
+		var thSrc, thIdx;// 表格头相关
+
+		tc.td = null;// 表格项编辑的对象
+		tc.tdIndex = 0;// 表格项序号
+		tc.addTdFlag = false;// 是否新增表格项的标志
+		var tdSrc, tdIdx;// 表格项相关
 
 		tc.tmplRest = function(){
 			tc.tmpl = null;
@@ -247,19 +258,18 @@
 		};
 
 		tc.addForm = function(module, key, val){
-			console.log(module, key, val);
 			module.form = queryForm(key);
 		};
 
 		tc.addButton = function(src, key, val){
-			console.log(src, key, val);
 			if (!src.btns){
 				src.btns = [];
 			}
 			btnSrc = src.btns;
+			btnIdx = btnSrc.length;
 			tc.btn = new ButtonVo();
 			tc.btn.type = key;
-			tc.addFlag = true;
+			tc.addBtnFlag = true;
 			$("#button_dialog").modal("show");
 		};
 
@@ -268,23 +278,142 @@
 			btnSrc = src;
 			btnIdx = idx;
 			tc.btn = angular.copy(src[idx]);
-			tc.addFlag = false;
+			tc.addBtnFlag = false;
 			$("#button_dialog").modal("show");
 		};
 
 		tc.saveButton = function(){
 			console.log(tc.btn);
-			if (tc.addFlag){
+			if (tc.addBtnFlag){
 				btnSrc.push(tc.btn);
 			} else{
 				btnSrc[btnIdx] = tc.btn;
 			}
 			tc.btn = null;
+			if (btnSaveCall) btnSaveCall();
 			$("#button_dialog").modal("hide");
 		};
 
 		tc.addTable = function(module){
+			module.table = new TableVo();
+		};
 
+		tc.addThead = function(src, key, val){
+			if (!src.theads){
+				src.theads = [];
+			}
+			thSrc = src.theads;
+			thIdx = thSrc.length;
+			tc.th = new THeadVo();
+			tc.th.type = key;
+			tc.addThFlag = true;
+			tc.thIndex = thIdx + 1;
+			$("#thead_dialog").modal("show");
+		};
+
+		tc.editThead = function(src, idx){
+			console.log(src, idx);
+			thSrc = src;
+			thIdx = idx;
+			tc.th = angular.copy(src[idx]);
+			tc.addThFlag = false;
+			tc.thIndex = thIdx + 1;
+			$("#thead_dialog").modal("show");
+		};
+
+		tc.saveThead = function(){
+			console.log(tc.th);
+			if (tc.addThFlag){
+				var len = thSrc.length;
+				var idx = tc.thIndex - 1;
+				if (len == 0 || idx < 0 || idx >= thSrc.length){
+					thSrc.push(tc.th);
+				} else{
+					var suf = thSrc.slice(idx);
+					thSrc.splice(idx, len - idx);
+					thSrc.push(tc.th);
+					console.log(suf);
+					angular.forEach(suf, function(it){
+						thSrc.push(it);
+					});
+				}
+			} else{
+				thSrc[thIdx] = tc.th;
+			}
+			tc.th = null;
+			$("#thead_dialog").modal("hide");
+		};
+
+		tc.addTheadButton = function(){
+			btnSrc = [];
+			btnIdx = 0;
+			tc.btn = new ButtonVo();
+			tc.btn.type = "BUTTON";
+			tc.addBtnFlag = true;
+			btnSaveCall = function(){
+				tc.th.btn = btnSrc[0];
+				btnSaveCall = null;
+			};
+			$("#button_dialog").modal("show");
+		};
+
+		tc.editTheadButton = function(){
+			btnSrc = [tc.th.btn];
+			btnIdx = 0;
+			tc.btn = angular.copy(tc.th.btn);
+			tc.addBtnFlag = false;
+			btnSaveCall = function(){
+				tc.th.btn = btnSrc[0];
+				btnSaveCall = null;
+			};
+			$("#button_dialog").modal("show");
+		};
+
+		tc.delTheadButton = function(){
+			tc.th.btn = null;
+		};
+
+		tc.addTbody = function(src, key, val){
+			if (!src.theads){
+				src.tbodies = [];
+			}
+			tdSrc = src.tbodies;
+			tdIdx = tdSrc.length;
+			tc.td = new TBodyVo();
+			tc.td.type = key;
+			tc.addTdFlag = true;
+			tc.tdIndex = tdIdx + 1;
+			$("#tbody_dialog").modal("show");
+		};
+
+		tc.editTbody = function(src, idx){
+			console.log(src, idx);
+			tdSrc = src;
+			tdIdx = idx;
+			tc.td = angular.copy(src[idx]);
+			tc.addTdFlag = false;
+			tc.tdIndex = tdIdx + 1;
+			$("#tbody_dialog").modal("show");
+		};
+
+		tc.saveTbody = function(){
+			console.log(tc.th);
+			if (tc.addTdFlag){
+				if (tdSrc.length == 0 || tc.tdIndex > tdSrc.length){
+					tdSrc.push(tc.td);
+				} else{
+					var idx = tc.tdIndex - 1;
+					var suf = tdSrc.slice(idx);
+					tdSrc.splice(idx, tdSrc.length - idx);
+					tdSrc.push(tc.td);
+					tdSrc.concat(suf);
+				}
+
+			} else{
+				tdSrc[tdIdx] = tc.td;
+			}
+			tc.td = null;
+			$("#tbody_dialog").modal("hide");
 		};
 
 		tc.delItem = function(src, idx){
@@ -306,7 +435,7 @@
 			}
 			attrSrc = src.attrs;
 			tc.attr = new AttrVo();
-			tc.attrAddFlag = true;
+			tc.addAttrFlag = true;
 			$("#attr_dialog").modal("show");
 		};
 
@@ -315,12 +444,12 @@
 			attrIdx = idx;
 			attrSrc = src.attrs;
 			tc.attr = angular.copy(attrSrc[idx]);
-			tc.attrAddFlag = false;
+			tc.addAttrFlag = false;
 			$("#attr_dialog").modal("show");
 		};
 
 		tc.saveAttr = function(){
-			if (tc.attrAddFlag){
+			if (tc.addAttrFlag){
 				attrSrc.push(tc.attr);
 			} else{
 				attrSrc[attrIdx] = tc.attr;

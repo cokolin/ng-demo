@@ -107,6 +107,7 @@
 					</fieldset>
 				</form>
 			</div>
+			<%--
 			<div class="col-xs-12">
 				<h4>模板的基本属性</h4>
 				<ul>
@@ -142,8 +143,11 @@
 				</ul>
 			</div>
 		</div>
-		<%@include file="include/button.jsp"%>
-		<%@include file="include/attr.jsp"%>
-	</div>
+		--%>
+			<%@include file="include/thead.jsp"%>
+			<%@include file="include/tbody.jsp"%>
+			<%@include file="include/button.jsp"%>
+			<%@include file="include/attr.jsp"%>
+		</div>
 </body>
 </html>

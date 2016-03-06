@@ -5,8 +5,8 @@
 				<fieldset>
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" data-ng-if="!tc.attrAddFlag">编辑属性</h4>
-						<h4 class="modal-title" data-ng-if="tc.attrAddFlag">新增属性</h4>
+						<h4 class="modal-title" data-ng-if="!tc.addAttrFlag">编辑属性</h4>
+						<h4 class="modal-title" data-ng-if="tc.addAttrFlag">新增属性</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -23,7 +23,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-ng-if="!tc.attrAddFlag" data-ng-click="tc.delAttr()">删除该属性</button>
+						<button type="button" class="btn btn-danger" data-ng-if="!tc.addAttrFlag" data-ng-click="tc.delAttr()">删除该属性</button>
 						<button type="submit" class="btn btn-primary" data-ng-disabled="attrForm.$invalid">保存</button>
 					</div>
 				</fieldset>
