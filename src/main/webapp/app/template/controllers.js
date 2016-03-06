@@ -57,7 +57,7 @@
 	};
 
 	FormVo.prototype.addBtn = function(btn){
-		return this.btns.push(btn);
+		return this.btns.unshift(btn);
 	};
 
 	function InputVo(){
@@ -248,8 +248,10 @@
 
 		tc.addModule = function(tmpl, key, val){
 			if (tmpl.modules){
-				for (var i = 0; i < tmpl.modules.length; i++){
-					if (tmpl.modules[i].type == "NORMAL") return window.alert("已经存在“普通表单组件”！");
+				if (key == "NORMAL"){
+					for (var i = 0; i < tmpl.modules.length; i++){
+						if (tmpl.modules[i].type == "NORMAL") return window.alert("已经存在“普通表单组件”！");
+					}
 				}
 				tmpl.modules.push(moduleBuilder(key));
 			} else{
@@ -285,7 +287,7 @@
 		tc.saveButton = function(){
 			console.log(tc.btn);
 			if (tc.addBtnFlag){
-				btnSrc.push(tc.btn);
+				btnSrc.unshift(tc.btn);
 			} else{
 				btnSrc[btnIdx] = tc.btn;
 			}
@@ -312,7 +314,6 @@
 		};
 
 		tc.editThead = function(src, idx){
-			console.log(src, idx);
 			thSrc = src;
 			thIdx = idx;
 			tc.th = angular.copy(src[idx]);
@@ -332,7 +333,6 @@
 					var suf = thSrc.slice(idx);
 					thSrc.splice(idx, len - idx);
 					thSrc.push(tc.th);
-					console.log(suf);
 					angular.forEach(suf, function(it){
 						thSrc.push(it);
 					});
@@ -387,7 +387,6 @@
 		};
 
 		tc.editTbody = function(src, idx){
-			console.log(src, idx);
 			tdSrc = src;
 			tdIdx = idx;
 			tc.td = angular.copy(src[idx]);
