@@ -3,6 +3,8 @@ package ng.demo.vo.usual;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ng.demo.vo.usual.enums.TBodyType;
 
 public class TBodyVo extends Element {
@@ -12,7 +14,7 @@ public class TBodyVo extends Element {
 	private TBodyType type;
 
 	/** radio 或 checkbox 的载体 */
-	private InputVo ipt;
+	private ColumVo ipt;
 
 	/** 按钮组的内容 */
 	private List<ButtonVo> btns;
@@ -36,11 +38,11 @@ public class TBodyVo extends Element {
 		this.type = type;
 	}
 
-	public InputVo getIpt() {
+	public ColumVo getIpt() {
 		return ipt;
 	}
 
-	public void setIpt(InputVo ipt) {
+	public void setIpt(ColumVo ipt) {
 		this.ipt = ipt;
 	}
 
@@ -52,6 +54,7 @@ public class TBodyVo extends Element {
 		this.btns = btns;
 	}
 	
+	@JsonIgnore
 	public boolean addBtn(ButtonVo btn) {
 		return this.btns.add(btn);
 	}

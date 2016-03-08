@@ -3,6 +3,8 @@ package ng.demo.vo.usual;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class TableVo extends Element {
 	private static final long serialVersionUID = 1450727832026028792L;
 
@@ -40,10 +42,12 @@ public class TableVo extends Element {
 		this.tbodies = tbodies;
 	}
 
+	@JsonIgnore
 	public boolean addThead(THeadVo thead) {
 		return this.theads.add(thead);
 	}
 
+	@JsonIgnore
 	public boolean addTbody(TBodyVo tbody) {
 		return this.tbodies.add(tbody);
 	}

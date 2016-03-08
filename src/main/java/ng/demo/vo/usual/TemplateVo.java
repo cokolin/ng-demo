@@ -3,6 +3,8 @@ package ng.demo.vo.usual;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ng.demo.base.BaseModel;
 
 public class TemplateVo extends BaseModel {
@@ -79,6 +81,7 @@ public class TemplateVo extends BaseModel {
 		this.modules = modules;
 	}
 
+	@JsonIgnore
 	public boolean addModules(ModuleVo module) {
 		return this.modules.add(module);
 	}

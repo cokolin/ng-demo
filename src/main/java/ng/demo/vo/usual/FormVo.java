@@ -3,6 +3,8 @@ package ng.demo.vo.usual;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ng.demo.vo.usual.enums.FormType;
 
 public class FormVo extends Element {
@@ -26,21 +28,21 @@ public class FormVo extends Element {
 	private String disabled;
 
 	/** 表单的输入项 */
-	private List<InputVo> ipts;
+	private List<ColumVo> cols;
 
 	/** 表单的按钮项 */
 	private List<ButtonVo> btns;
 
 	public FormVo() {
 		super();
-		this.ipts = new ArrayList<>(4);
+		this.cols = new ArrayList<>(4);
 		this.btns = new ArrayList<>(4);
 	}
 
 	public FormVo(FormType type, String name, String clas) {
 		super(name, clas);
 		this.type = type;
-		this.ipts = new ArrayList<>(4);
+		this.cols = new ArrayList<>(4);
 		this.btns = new ArrayList<>(4);
 	}
 
@@ -92,12 +94,12 @@ public class FormVo extends Element {
 		this.disabled = disabled;
 	}
 
-	public List<InputVo> getIpts() {
-		return ipts;
+	public List<ColumVo> getCols() {
+		return cols;
 	}
 
-	public void setIpts(List<InputVo> ipts) {
-		this.ipts = ipts;
+	public void setCols(List<ColumVo> cols) {
+		this.cols = cols;
 	}
 
 	public List<ButtonVo> getBtns() {
@@ -108,10 +110,12 @@ public class FormVo extends Element {
 		this.btns = btns;
 	}
 
-	public boolean addIpt(InputVo ipt) {
-		return this.ipts.add(ipt);
+	@JsonIgnore
+	public boolean addCol(ColumVo col) {
+		return this.cols.add(col);
 	}
 
+	@JsonIgnore
 	public boolean addBtn(ButtonVo btn) {
 		return this.btns.add(btn);
 	}

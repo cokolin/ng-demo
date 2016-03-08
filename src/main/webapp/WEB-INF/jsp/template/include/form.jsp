@@ -69,7 +69,7 @@
 							<li>
 								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-										添加表单项 <span class="caret"></span>
+										添加表单栏 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
 										<li data-ng-repeat="(key, val) in tc.types.input"><a href="#" data-ng-click="tc.addInput(module.form, key, val)">{{val}}</a></li>

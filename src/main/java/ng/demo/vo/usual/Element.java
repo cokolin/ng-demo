@@ -3,6 +3,8 @@ package ng.demo.vo.usual;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ng.demo.vo.usual.AttrVo;
 import ng.demo.base.BaseModel;
 
@@ -52,6 +54,7 @@ public class Element extends BaseModel {
 		this.attrs = attrs;
 	}
 	
+	@JsonIgnore
 	public boolean addAttr(AttrVo attr){
 		return this.attrs.add(attr);
 	}

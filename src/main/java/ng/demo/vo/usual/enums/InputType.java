@@ -13,7 +13,10 @@ public enum InputType implements BaseType {
 	
 	CHECKBOX("复选框"),
 	
-	RADIO("单选框");
+	RADIO("单选框"),
+	
+	
+	;
 
 	private String value;
 
