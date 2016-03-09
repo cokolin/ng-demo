@@ -16,8 +16,9 @@
 		this.name = null;
 		this.value = null;
 	}
-	AttrVo.prototype.init = function(name){
+	AttrVo.prototype.init = function(name, value){
 		this.name = name;
+		this.value = value;
 		return this;
 	};
 
@@ -44,7 +45,7 @@
 	function FormVo(){
 		this.url = null;
 		this.type = null;
-		this.expUrl = null;
+		this.extUrl = null;
 		this.method = null;
 		this.submit = null;
 		this.disabled = null;
@@ -191,15 +192,15 @@
 			var table = new TableVo();
 			table.clas = "table-striped table-bordered table-hover table-condensed";
 			{
-				var thead = new THeadVo();
-				thead.type = "TEXT";
+				var thead = new THeadVo().init("TEXT");
 				thead.name = "#";
+				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				var tbody = new TBodyVo();
-				tbody.type = "TEXT";
+				var tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{$index+1}}";
+				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			module.table = table;
@@ -505,7 +506,7 @@
 		};
 		
 		tc.disTheadButton = function(){
-			return tc.theads.type=='BUTTON' && !tc.theads.btn;
+			return !tc.theads || tc.theads.type != 'BUTTON' || tc.theads.btn;
 		};
 
 		tc.addTheadButton = function(){

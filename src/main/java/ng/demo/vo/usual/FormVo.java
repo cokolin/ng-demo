@@ -16,9 +16,10 @@ public class FormVo extends Element {
 	/** 表单数据提交的地址 */
 	private String url;
 	
-	/** 表单结果导出的地址 */
-	private String expUrl;
+	/** 表单的备用提交地址 */
+	private String extUrl;
 	
+	/** 表单提交的方式 */
 	private String method;
 
 	/** 表单的 ng-submit */
@@ -62,12 +63,12 @@ public class FormVo extends Element {
 		this.url = url;
 	}
 
-	public String getExpUrl() {
-		return expUrl;
+	public String getExtUrl() {
+		return extUrl;
 	}
 
-	public void setExpUrl(String expUrl) {
-		this.expUrl = expUrl;
+	public void setExtUrl(String extUrl) {
+		this.extUrl = extUrl;
 	}
 
 	public String getMethod() {

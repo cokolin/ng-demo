@@ -32,9 +32,9 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label for="" class="col-xs-3 control-label">导出地址</label>
+						<label for="" class="col-xs-3 control-label">第二地址</label>
 						<div class="col-xs-9">
-							<input type="text" class="form-control" name="form_exp_url" data-ng-model="module.form.expUrl" placeholder="例如：/module/export" maxlength="200">
+							<input type="text" class="form-control" name="form_ext_url" data-ng-model="module.form.extUrl" placeholder="例如：/module/export" maxlength="200">
 						</div>
 					</div>
 				</div>

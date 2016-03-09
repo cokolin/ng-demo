@@ -56,7 +56,7 @@
 								<button type="button" class="btn btn-warning" data-ng-disabled="module.table" data-ng-click="tc.addTable(module)">添加表格</button>
 							</li>
 							<li>
-								<button type="button" class="btn btn-warning" data-ng-click="tc.addAttr(module)">添加属性</button>
+								<button type="button" class="btn btn-warning" data-ng-click="tc.addItem('attrs', module, null)">添加属性</button>
 							</li>
 							<li>
 								<div class="checkbox">
@@ -70,7 +70,7 @@
 					<div class="form-group">
 						<ul class="list-inline text-right col-xs-12">
 							<li data-ng-repeat="attr in module.attrs">
-								<button class="btn btn-sm btn-default code" type="button" data-ng-click="tc.editAttr(module, $index)">{{attr.name}}="{{attr.value}}"</button>
+								<button class="btn btn-sm btn-default code" type="button" data-ng-click="tc.editItem('attrs', module, $index)">{{attr.name}}="{{attr.value}}"</button>
 							</li>
 						</ul>
 					</div>
