@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%><div class="col-xs-12">
 	<div data-ng-repeat="module in tc.tmpl.modules" class="panel panel-primary">
 		<div class="panel-heading">
-			<button type="button" class="close" data-ng-click="tc.remove(tc.tmpl.modules, $index)">&times;</button>
+			<button type="button" class="close" data-ng-click="tc.delItem(tc.tmpl.modules, $index)">&times;</button>
 			<span>{{$index + 1}}.{{tc.types.module[module.type]}}</span>
 		</div>
 		<div class="panel-body" style="padding-bottom: 0;">

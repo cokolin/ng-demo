@@ -15,9 +15,6 @@ public class InputVo extends Element {
 	 */
 	private String placeholder;
 
-	/** 限制长度 */
-	private String maxlength;
-
 	/** 禁用条件 */
 	private String disabled;
 
@@ -53,14 +50,6 @@ public class InputVo extends Element {
 
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
-	}
-
-	public String getMaxlength() {
-		return maxlength;
-	}
-
-	public void setMaxlength(String maxlength) {
-		this.maxlength = maxlength;
 	}
 
 	public String getDisabled() {

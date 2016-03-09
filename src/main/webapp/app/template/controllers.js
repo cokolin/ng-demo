@@ -67,7 +67,6 @@
 	function InputVo(){
 		this.type = null;
 		this.placeholder = null;
-		this.maxlength = null;
 		this.disabled = null;
 		this.required = null;
 		this.readonly = null;
@@ -175,7 +174,7 @@
 			btn.type = "SUBMIT";
 			btn.clas = "btn-primary";
 			btn.name = "查询";
-			btn.icon = "glyphicon glyphicon-search";
+			btn.icon = ICONS[10];
 			btn.addAttr("ng-disabled", "vm.queryNow || queryForm.$invalid");
 			form.addBtn(btn);
 		}
@@ -229,216 +228,225 @@
 	function TemplateController($http, $scope){
 		var tc = this;
 
-		var datSrc = {
-		  attr: null,// 属性项
-		  ipt: null,// 表单项
-		  col: null,// 表单栏
-		  btn: null,// 按钮项
-		  th: null,// 表格头
-		  td: null,// 表格项
-		};
-
-		var datIdx = {
-		  attr: null,
-		  ipt: null,
-		  col: null,
-		  btn: null,
-		  th: null,
-		  td: null,
-		};
-
-		var datArg = {
-		  attr: "attrs",
-		  ipt: "ipts",
-		  col: "cols",
-		  btn: "btns",
-		  th: "theads",
-		  td: "tbodies",
-		};
-
-		var datObj = {
-				attr: function(type){
-			  	return new AttrVo().init(type);
-			  },
-			  ipt: function(type){
-			  	return new InputVo().init(type);
-			  },
-			  col: function(type){
-			  	return new ColumVo().init(type);
-			  },
-			  btn: function(type){
-			  	return new ButtonVo().init(type);
-			  },
-			  th: function(type){
-			  	return new THeadVo().init(type);
-			  },
-			  td: function(type){
-			  	return new TBodyVo().init(type);
-			  },
-		};
-
-		var datAdd = {
-		  attr: function(){
-		  	
+		var dat = {
+		  attrs: {// 属性项
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new AttrVo().init(type);
+		    },
+		    add: function(){
+			    var cfg = dat.attrs;
+			    cfg.src.push(tc.attrs);
+		    },
+		    edit: function(){
+			    var cfg = dat.attrs;
+			    cfg.src[cfg.idx] = tc.attrs;
+		    },
+		    callback: {
+		      add: null,
+		      edit: null,
+		      save: null,
+		      del: function(){
+		      	$("#attrs_dialog").modal("hide");
+		      },
+		    },
 		  },
-		  ipt: function(){
+		  cols: {// 表单栏
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new ColumVo().init(type);
+		    },
+		    add: function(){
+			    var cfg = dat.cols;
+			    cfg.src.push(tc.cols);
+		    },
+		    edit: function(){
+			    var cfg = dat.cols;
+			    cfg.src[cfg.idx] = tc.cols;
+		    },
+		    callback: {
+		      add: null,
+		      edit: null,
+		      save: null,
+		    },
 		  },
-		  col: function(){
+		  ipts: {// 表单项
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new InputVo().init(type);
+		    },
+		    add: function(){
+			    var cfg = dat.ipts;
+			    cfg.src.push(tc.ipts);
+		    },
+		    edit: function(){
+			    var cfg = dat.ipts;
+			    cfg.src[cfg.idx] = tc.ipts;
+		    },
+		    callback: {
+		      add: null,
+		      edit: null,
+		      save: null,
+		    },
 		  },
-		  btn: function(){
+		  btns: {// 按钮项
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new ButtonVo().init(type);
+		    },
+		    add: function(){
+			    dat.btn.src.unshift(tc.btns);
+		    },
+		    edit: function(){
+			    var cfg = dat.btns;
+			    cfg.src[cfg.idx] = tc.btns;
+		    },
+		    callback: {
+		      add: null,
+		      edit: null,
+		      save: null,
+		    },
 		  },
-		  th: function(){
+		  theads: {// 表格头
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new THeadVo().init(type);
+		    },
+		    add: function(){
+			    var cfg = dat.theads;
+			    var idx = tc.thIndex - 1;
+			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
+				    cfg.src.push(tc.theads);
+			    } else{
+				    var suf = cfg.src.slice(idx);
+				    cfg.src.push(tc.theads);
+				    angular.forEach(suf, function(it){
+					    cfg.src.push(it);
+				    });
+			    }
+		    },
+		    edit: function(){
+			    var cfg = dat.theads;
+			    cfg.src[cfg.idx] = tc.theads;
+		    },
+		    callback: {
+		      add: function(){
+			      tc.thIndex = dat.theads.idx + 1;
+			      return true;
+		      },
+		      edit: function(){
+			      tc.thIndex = dat.theads.idx + 1;
+			      return true;
+		      },
+		      save: null,
+		    },
 		  },
-		  td: function(){
+		  tbodies: {// 表格项
+		    src: null,
+		    idx: null,
+		    obj: function(type){
+			    return new TBodyVo().init(type);
+		    },
+		    add: function(){
+			    var cfg = dat.tbodies;
+			    var idx = tc.tdIndex - 1;
+			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
+				    cfg.src.push(tc.tbodies);
+			    } else{
+				    var suf = cfg.src.slice(idx);
+				    cfg.src.push(tc.tbodies);
+				    angular.forEach(suf, function(it){
+					    cfg.src.push(it);
+				    });
+			    }
+		    },
+		    edit: function(){
+			    var cfg = dat.tbodies;
+			    cfg.src[cfg.idx] = tc.tbodies;
+		    },
+		    callback: {
+		      add: function(){
+			      tc.tdIndex = dat.tbodies.idx + 1;
+			      return true;
+		      },
+		      edit: function(){
+			      tc.tdIndex = dat.tbodies.idx + 1;
+			      return true;
+		      },
+		      save: null,
+		    },
 		  },
 		};
 		
-		var datEdit = {
-			  attr: function(){
-			  },
-			  ipt: function(){
-			  },
-			  col: function(){
-			  },
-			  btn: function(){
-			  },
-			  th: function(){
-			  },
-			  td: function(){
-			  },
-			};
-
-		var addCallback = {
-		  attr: function(){
-			  return true;
-		  },
-		  ipt: function(){
-			  return true;
-		  },
-		  col: function(){
-			  return true;
-		  },
-		  btn: function(){
-			  return true;
-		  },
-		  th: function(){
-			  tc.thIndex = datIdx.th + 1;
-			  return true;
-		  },
-		  td: function(){
-			  tc.tdIndex = datIdx.td + 1;
-			  return true;
-		  },
-		};
-
-		var editCallback = {
-		  attr: function(){
-			  return true;
-		  },
-		  ipt: function(){
-			  return true;
-		  },
-		  col: function(){
-			  return true;
-		  },
-		  btn: function(){
-			  return true;
-		  },
-		  th: function(){
-			  tc.thIndex = datIdx.th + 1;
-			  return true;
-		  },
-		  td: function(){
-			  tc.tdIndex = datIdx.td + 1;
-			  return true;
-		  },
-		};
-
-		var saveCallback = {
-		  attr: function(){
-			  return true;
-		  },
-		  ipt: function(){
-			  return true;
-		  },
-		  col: function(){
-			  return true;
-		  },
-		  btn: function(){
-			  return true;
-		  },
-		  th: function(){
-			  return true;
-		  },
-		  td: function(){
-			  return true;
-		  },
-		};
+		tc.dat = dat;
+		tc.attrs = null;
+		tc.cols = null;
+		tc.ipts = null;
+		tc.btns = null;
+		tc.theads = null;
+		tc.tbodies = null;
 
 		tc.addFlag = {
-		  attr: false,
-		  ipt: false,
-		  col: false,
-		  btn: false,
-		  th: false,
-		  td: false,
+		  attrs: false,
+		  cols: false,
+		  ipts: false,
+		  btns: false,
+		  theads: false,
+		  tbodies: false,
 		};
 
-		tc.attr = null;// 属性项编辑的对象
-		tc.addAttrFlag = false;// 是否新增属性标志
-		var attrSrc, attrIdx;// 属性相关
-
-		tc.ipt = null;// 表单项编辑的对象
-		tc.addIptFlag = false;// 是否新增表单项的标志
-		var iptSrc, iptIdx;// 表单项相关
-
-		tc.col = null;// 表单栏编辑的对象
-		tc.addColFlag = false;// 是否新增表单栏的标志
-		var colSrc, colIdx;// 表单栏相关
-
-		tc.btn = null;// 按钮项编辑的对象
-		tc.addBtnFlag = false;// 是否新增按钮项的标志
-		var btnSrc, btnIdx, btnSaveCall;// 按钮项相关
-
-		tc.th = null;// 表格头编辑的对象
-		tc.thIndex = 0;// 表格头序号
-		tc.addThFlag = false;// 是否新增表格头的标志
-		var thSrc, thIdx;// 表格头相关
-
-		tc.td = null;// 表格项编辑的对象
-		tc.tdIndex = 0;// 表格项序号
-		tc.addTdFlag = false;// 是否新增表格项的标志
-		var tdSrc, tdIdx;// 表格项相关
-
-		tc.addItem = function(type, src, key, val){
-			var arg = datArg[type];
-			if (!src[arg]){
-				src[arg] = [];
+		tc.addItem = function(type, src, key){
+			if (!src[type]){
+				src[type] = [];
 			}
-			datSrc[type] = src[arg];
-			datIdx[type] = datSrc[type].length;
-			tc[type] = datObj[type](key, val);
+			var cfg = dat[type];
+			cfg.src = src[type];
+			cfg.idx = cfg.src.length;
 			tc.addFlag[type] = true;
-			if (addCallback[type]()) $("#" + type + "_dialog").modal("show");
+			tc[type] = cfg.obj(key);
+			if (!cfg.callback.add || cfg.callback.add()){
+				$("#" + type + "_dialog").modal("show");
+			}
 		};
 
 		tc.editItem = function(type, src, idx){
-			datSrc[type] = src;
-			datIdx[type] = idx;
-			tc[type] = angular.copy(src[idx]);
+			var cfg = dat[type];
+			cfg.src = src[type];
+			cfg.idx = idx;
 			tc.addFlag[type] = false;
-			if (editCallback[type]()) $("#" + type + "_dialog").modal("show");
+			tc[type] = angular.copy(cfg.src[idx]);
+			if (!cfg.callback.edit || cfg.callback.edit()){
+				$("#" + type + "_dialog").modal("show");
+			}
 		};
 
 		tc.saveItem = function(type){
+			var cfg = dat[type];
 			console.log(tc[type]);
 			if (tc.addFlag[type]){
-				datAdd[type]();
+				cfg.add();
 			} else{
-				datEdit[type]();
+				cfg.edit();
 			}
 			tc[type] = null;
-			if (saveCallback[type]()) $("#" + type + "_dialog").modal("hide");
+			if (!cfg.callback.save || cfg.callback.save()){
+				$("#" + type + "_dialog").modal("hide");
+			}
+		};
+
+		tc.delItem = function(src, key, callback){
+			if (!window.confirm("确定删除该项？")) return;
+			if (angular.isArray(src)){
+				src.splice(key, 1);
+			} else{
+				src[key] = null;
+			}
+			if(callback) callback();
 		};
 
 		tc.tmplRest = function(){
@@ -492,214 +500,45 @@
 			module.form = queryForm(key);
 		};
 
-		tc.addColum = function(src){
-		};
-
-		tc.editColum = function(src, idx){
-		};
-
-		tc.saveColum = function(){
-		};
-
-		tc.addButton = function(src, key, val){
-			if (!src.btns){
-				src.btns = [];
-			}
-			btnSrc = src.btns;
-			btnIdx = btnSrc.length;
-			tc.btn = new ButtonVo();
-			tc.btn.type = key;
-			tc.addBtnFlag = true;
-			$("#button_dialog").modal("show");
-		};
-
-		tc.editButton = function(src, idx){
-			console.log(src, idx);
-			btnSrc = src;
-			btnIdx = idx;
-			tc.btn = angular.copy(src[idx]);
-			tc.addBtnFlag = false;
-			$("#button_dialog").modal("show");
-		};
-
-		tc.saveButton = function(){
-			console.log(tc.btn);
-			if (tc.addBtnFlag){
-				btnSrc.unshift(tc.btn);
-			} else{
-				btnSrc[btnIdx] = tc.btn;
-			}
-			tc.btn = null;
-			if (btnSaveCall) btnSaveCall();
-			$("#button_dialog").modal("hide");
-		};
-
 		tc.addTable = function(module){
 			module.table = new TableVo();
 		};
-
-		tc.addThead = function(src, key, val){
-			if (!src.theads){
-				src.theads = [];
-			}
-			thSrc = src.theads;
-			thIdx = thSrc.length;
-			tc.th = new THeadVo();
-			tc.th.type = key;
-			tc.addThFlag = true;
-			tc.thIndex = thIdx + 1;
-			$("#thead_dialog").modal("show");
-		};
-
-		tc.editThead = function(src, idx){
-			thSrc = src;
-			thIdx = idx;
-			tc.th = angular.copy(src[idx]);
-			tc.addThFlag = false;
-			tc.thIndex = thIdx + 1;
-			$("#thead_dialog").modal("show");
-		};
-
-		tc.saveThead = function(){
-			console.log(tc.th);
-			if (tc.addThFlag){
-				var len = thSrc.length;
-				var idx = tc.thIndex - 1;
-				if (len == 0 || idx < 0 || idx >= thSrc.length){
-					thSrc.push(tc.th);
-				} else{
-					var suf = thSrc.slice(idx);
-					thSrc.splice(idx, len - idx);
-					thSrc.push(tc.th);
-					angular.forEach(suf, function(it){
-						thSrc.push(it);
-					});
-				}
-			} else{
-				thSrc[thIdx] = tc.th;
-			}
-			tc.th = null;
-			$("#thead_dialog").modal("hide");
+		
+		tc.disTheadButton = function(){
+			return tc.theads.type=='BUTTON' && !tc.theads.btn;
 		};
 
 		tc.addTheadButton = function(){
-			btnSrc = [];
-			btnIdx = 0;
-			tc.btn = new ButtonVo();
-			tc.btn.type = "BUTTON";
-			tc.addBtnFlag = true;
-			btnSaveCall = function(){
-				tc.th.btn = btnSrc[0];
-				btnSaveCall = null;
+			var cfg = dat.btns;
+			cfg.src = [];
+			cfg.idx = 0;
+			cfg.callback.save = function(){
+				tc.theads.btn = cfg.src[0];
+				cfg.callback.save = null;
+				return true;
 			};
-			$("#button_dialog").modal("show");
+			tc.btns = cfg.obj("BUTTON");
+			tc.addFlag.btns = true;
+			$("#btns_dialog").modal("show");
 		};
 
 		tc.editTheadButton = function(){
-			btnSrc = [tc.th.btn];
-			btnIdx = 0;
-			tc.btn = angular.copy(tc.th.btn);
-			tc.addBtnFlag = false;
-			btnSaveCall = function(){
-				tc.th.btn = btnSrc[0];
-				btnSaveCall = null;
+			var cfg = dat.btns;
+			var btn = tc.theads.btn;
+			cfg.src = [btn];
+			cfg.idx = 0;
+			cfg.callback.save = function(){
+				tc.theads.btn = cfg.src[0];
+				cfg.callback.save = null;
+				return true;
 			};
+			tc.btns = angular.copy(btn);
+			tc.addFlag.btns = false;
 			$("#button_dialog").modal("show");
 		};
 
 		tc.delTheadButton = function(){
-			tc.th.btn = null;
-		};
-
-		tc.addTbody = function(src, key, val){
-			if (!src.theads){
-				src.tbodies = [];
-			}
-			tdSrc = src.tbodies;
-			tdIdx = tdSrc.length;
-			tc.td = new TBodyVo();
-			tc.td.type = key;
-			tc.addTdFlag = true;
-			tc.tdIndex = tdIdx + 1;
-			$("#tbody_dialog").modal("show");
-		};
-
-		tc.editTbody = function(src, idx){
-			tdSrc = src;
-			tdIdx = idx;
-			tc.td = angular.copy(src[idx]);
-			tc.addTdFlag = false;
-			tc.tdIndex = tdIdx + 1;
-			$("#tbody_dialog").modal("show");
-		};
-
-		tc.saveTbody = function(){
-			console.log(tc.th);
-			if (tc.addTdFlag){
-				if (tdSrc.length == 0 || tc.tdIndex > tdSrc.length){
-					tdSrc.push(tc.td);
-				} else{
-					var idx = tc.tdIndex - 1;
-					var suf = tdSrc.slice(idx);
-					tdSrc.splice(idx, tdSrc.length - idx);
-					tdSrc.push(tc.td);
-					tdSrc.concat(suf);
-				}
-
-			} else{
-				tdSrc[tdIdx] = tc.td;
-			}
-			tc.td = null;
-			$("#tbody_dialog").modal("hide");
-		};
-
-		tc.delItem = function(src, idx){
-			if (!window.confirm("确定删除该项？")) return;
-			src.splice(idx, 1);
-		};
-
-		tc.remove = function(data, key){
-			if (angular.isArray(data)){
-				data.splice(key, 1);
-			} else{
-				data[key] = null;
-			}
-		};
-
-		tc.addAttr = function(src){
-			if (!src.attrs){
-				src.attrs = [];
-			}
-			attrSrc = src.attrs;
-			tc.attr = new AttrVo();
-			tc.addAttrFlag = true;
-			$("#attr_dialog").modal("show");
-		};
-
-		tc.editAttr = function(src, idx){
-			console.log(src, idx);
-			attrIdx = idx;
-			attrSrc = src.attrs;
-			tc.attr = angular.copy(attrSrc[idx]);
-			tc.addAttrFlag = false;
-			$("#attr_dialog").modal("show");
-		};
-
-		tc.saveAttr = function(){
-			if (tc.addAttrFlag){
-				attrSrc.push(tc.attr);
-			} else{
-				attrSrc[attrIdx] = tc.attr;
-			}
-			tc.attr = null;
-			$("#attr_dialog").modal("hide");
-		};
-
-		tc.delAttr = function(){
-			if (!window.confirm("确定删除该属性？")) return;
-			attrSrc.splice(attrIdx, 1);
-			tc.attr = null;
-			$("#attr_dialog").modal("hide");
+			tc.theads.btn = null;
 		};
 
 		tc.saveTmpl = function(){

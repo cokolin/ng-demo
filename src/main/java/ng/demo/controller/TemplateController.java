@@ -1,6 +1,6 @@
 package ng.demo.controller;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 
 import ng.demo.vo.usual.TemplateVo;
@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TemplateController {
 	private static Logger logger = LogManager.getLogger();
 
-	private Map<String, TemplateVo> map = new HashMap<>();
+	private Map<String, TemplateVo> map = new TreeMap<>();
 
 	@RequestMapping
 	public String index(Model model) {
-		Map<String, String> page = new HashMap<>(map.size());
+		Map<String, String> page = new TreeMap<>();
 		for (String key : map.keySet()) {
 			page.put(key, map.get(key).getTitle());
 		}
@@ -52,7 +52,7 @@ public class TemplateController {
 	@ResponseBody
 	@RequestMapping("types")
 	public Object types() {
-		Map<String, Map<String, String>> cfgs = new HashMap<>();
+		Map<String, Map<String, String>> cfgs = new TreeMap<>();
 		cfgs.put("button", getTypeMap(ButtonType.values()));
 		cfgs.put("form", getTypeMap(FormType.values()));
 		cfgs.put("input", getTypeMap(InputType.values()));
@@ -63,7 +63,7 @@ public class TemplateController {
 	}
 
 	private Map<String, String> getTypeMap(BaseType[] types) {
-		Map<String, String> map = new HashMap<>(types.length);
+		Map<String, String> map = new TreeMap<>();
 		for (BaseType type : types) {
 			map.put(type.getKey(), type.getValue());
 		}
@@ -73,7 +73,7 @@ public class TemplateController {
 	@ResponseBody
 	@RequestMapping("pages")
 	public Object pages() {
-		Map<String, String> page = new HashMap<>(map.size());
+		Map<String, String> page = new TreeMap<>();
 		for (String key : map.keySet()) {
 			page.put(key, map.get(key).getTitle());
 		}

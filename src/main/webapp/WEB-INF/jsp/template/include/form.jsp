@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%><div class="col-xs-12">
 	<div data-ng-if="module.form" class="panel panel-success">
 		<div class="panel-heading">
-			<button type="button" class="close" data-ng-click="tc.remove(module, 'form')">&times;</button>
+			<button type="button" class="close" data-ng-click="tc.delItem(module, 'form')">&times;</button>
 			<span>{{tc.types.form[module.form.type]}}</span>
 		</div>
 		<div class="panel-body">
@@ -67,14 +67,7 @@
 						<label for="" class="col-xs-3 control-label">表单项目</label>
 						<ul class="list-inline col-xs-9">
 							<li>
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-										添加表单栏 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li data-ng-repeat="(key, val) in tc.types.input"><a href="#" data-ng-click="tc.addInput(module.form, key, val)">{{val}}</a></li>
-									</ul>
-								</div>
+								<button type="button" class="btn btn-warning" data-ng-click="tc.addItem('cols', module.form, null)">添加表单栏</button>
 							</li>
 							<li>
 								<div class="btn-group" role="group">
@@ -82,12 +75,12 @@
 										添加按钮项 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
-										<li data-ng-repeat="(key, val) in tc.types.button"><a href="#" data-ng-click="tc.addButton(module.form, key, val)">{{val}}</a></li>
+										<li data-ng-repeat="(key, val) in tc.types.button"><a href="#" data-ng-click="tc.addItem('btns', module.form, key)">{{val}}</a></li>
 									</ul>
 								</div>
 							</li>
 							<li>
-								<button type="button" class="btn btn-warning" data-ng-click="tc.addAttr(module.form)">添加属性</button>
+								<button type="button" class="btn btn-warning" data-ng-click="tc.addItem('attrs', module.form, null)">添加属性</button>
 							</li>
 						</ul>
 					</div>
@@ -96,7 +89,7 @@
 					<div class="form-group">
 						<ul class="list-inline col-xs-12 text-right">
 							<li data-ng-repeat="attr in module.form.attrs">
-								<button class="btn btn-sm btn-default code" type="button" data-ng-click="tc.editAttr(module.form, $index)">{{attr.name}}="{{attr.value}}"</button>
+								<button class="btn btn-sm btn-default code" type="button" data-ng-click="tc.editItem('attrs', module.form, $index)">{{attr.name}}="{{attr.value}}"</button>
 							</li>
 						</ul>
 					</div>
@@ -105,7 +98,7 @@
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th>表单项</th>
+								<th>表单栏</th>
 								<th>类型</th>
 								<th>名称</th>
 								<th>样式</th>
@@ -122,12 +115,12 @@
 								<td>
 									<ul class="list-inline">
 										<li data-ng-repeat="attr in ipt.attrs">
-											<button class="btn btn-xs btn-default code" type="button" data-ng-click="tc.editAttr(ipt, $index)">{{attr.name}}="{{attr.value}}"</button>
+											<button class="btn btn-xs btn-default code" type="button" data-ng-click="tc.editItem('attrs', ipt, $index)">{{attr.name}}="{{attr.value}}"</button>
 										</li>
 									</ul>
 								</td>
-								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editInput(module.form.ipts, $index)">编辑</button>
-									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.form.ipts, $index)">删除</button></td>
+								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('cols', module.form, $index)">编辑</button>
+									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.form.cols, $index)">删除</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -158,11 +151,11 @@
 								<td>
 									<ul class="list-inline">
 										<li data-ng-repeat="attr in btn.attrs">
-											<button class="btn btn-xs btn-default code" type="button" data-ng-click="tc.editAttr(btn, $index)">{{attr.name}}="{{attr.value}}"</button>
+											<button class="btn btn-xs btn-default code" type="button" data-ng-click="tc.editItem('attrs', btn, $index)">{{attr.name}}="{{attr.value}}"</button>
 										</li>
 									</ul>
 								</td>
-								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editButton(module.form.btns, $index)">编辑</button>
+								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('btns', module.form, $index)">编辑</button>
 									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.form.btns, $index)">删除</button></td>
 							</tr>
 						</tbody>

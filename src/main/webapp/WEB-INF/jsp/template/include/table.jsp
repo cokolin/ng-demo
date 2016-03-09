@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%><div class="col-xs-12">
 	<div data-ng-if="module.table" class="panel panel-info">
 		<div class="panel-heading">
-			<button type="button" class="close" data-ng-click="tc.remove(module, 'table')">&times;</button>
+			<button type="button" class="close" data-ng-click="tc.delItem(module, 'table')">&times;</button>
 			<span>普通表格</span>
 		</div>
 		<div class="panel-body">
@@ -31,7 +31,7 @@
 									添加表格头 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li data-ng-repeat="(key, val) in tc.types.thead"><a href="#" data-ng-click="tc.addThead(module.table, key, val)">{{val}}</a></li>
+									<li data-ng-repeat="(key, val) in tc.types.thead"><a href="#" data-ng-click="tc.addItem('theads', module.table, key)">{{val}}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -53,7 +53,7 @@
 								<td>{{th.name}}</td>
 								<td>{{th.clas}}</td>
 								<td>
-									<button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editThead(module.table.theads, $index)">编辑</button>
+									<button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('theads', module.table, $index)">编辑</button>
 									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.table.theads, $index)">删除</button>
 								</td>
 							</tr>
@@ -69,7 +69,7 @@
 									添加表格项 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="#" data-ng-click="tc.addTbody(module.table, key, val)">{{val}}</a></li>
+									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="#" data-ng-click="tc.addItem('tbodies', module.table, key)">{{val}}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -91,7 +91,7 @@
 								<td>{{td.name}}</td>
 								<td>{{td.clas}}</td>
 								<td>
-									<button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editTbody(module.table.tbodies, $index)">编辑</button>
+									<button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('tbodies', module.table, $index)">编辑</button>
 									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.table.tbodies, $index)">删除</button>
 								</td>
 							</tr>

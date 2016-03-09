@@ -4,7 +4,7 @@
 <head>
 <%@include file="include/head.jsp"%>
 <style type="text/css">
-.table, .list-inline {
+.table,.list-inline {
 	margin-bottom: 0;
 }
 </style>
@@ -107,7 +107,8 @@
 					</fieldset>
 				</form>
 			</div>
-			<%--
+		</div>
+		<%--
 			<div class="col-xs-12">
 				<h4>模板的基本属性</h4>
 				<ul>
@@ -144,10 +145,12 @@
 			</div>
 		</div>
 		--%>
-			<%@include file="include/thead.jsp"%>
-			<%@include file="include/tbody.jsp"%>
-			<%@include file="include/button.jsp"%>
-			<%@include file="include/attr.jsp"%>
-		</div>
+		<%@include file="include/cols.jsp"%>
+		<%@include file="include/theads.jsp"%>
+		<%@include file="include/tbodies.jsp"%>
+		<%@include file="include/ipts.jsp"%>
+		<%@include file="include/btns.jsp"%>
+		<%@include file="include/attrs.jsp"%>
+	</div>
 </body>
 </html>
