@@ -14,7 +14,7 @@ public class TBodyVo extends Element {
 	private TBodyType type;
 
 	/** radio 或 checkbox 的载体 */
-	private ColumVo ipt;
+	private InputVo ipt;
 
 	/** 按钮组的内容 */
 	private List<ButtonVo> btns;
@@ -38,11 +38,11 @@ public class TBodyVo extends Element {
 		this.type = type;
 	}
 
-	public ColumVo getIpt() {
+	public InputVo getIpt() {
 		return ipt;
 	}
 
-	public void setIpt(ColumVo ipt) {
+	public void setIpt(InputVo ipt) {
 		this.ipt = ipt;
 	}
 

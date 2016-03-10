@@ -10,13 +10,13 @@ import ng.demo.base.BaseModel;
 
 public class Element extends BaseModel {
 	private static final long serialVersionUID = 4895075698041380029L;
-	
+
 	/** 名称 */
 	private String name;
-	
+
 	/** 样式 */
 	private String clas;
-	
+
 	/** 属性 */
 	private List<AttrVo> attrs = new ArrayList<AttrVo>(4);
 
@@ -53,10 +53,22 @@ public class Element extends BaseModel {
 	public void setAttrs(List<AttrVo> attrs) {
 		this.attrs = attrs;
 	}
-	
+
 	@JsonIgnore
-	public boolean addAttr(AttrVo attr){
+	public boolean addAttr(AttrVo attr) {
 		return this.attrs.add(attr);
 	}
-	
+
+	@JsonIgnore
+	public String getAttrsString() {
+		if (this.attrs == null) {
+			return "";
+		}
+		StringBuilder str = new StringBuilder();
+		for (AttrVo attr : attrs) {
+			str.append(' ').append(attr.getName()).append("=\"").append(attr.getValue()).append('"');
+		}
+		return str.toString();
+	}
+
 }

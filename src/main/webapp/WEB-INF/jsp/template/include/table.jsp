@@ -24,6 +24,14 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
+						<label for="" class="col-xs-3 control-label">表格循环</label>
+						<div class="col-xs-9">
+							<input type="text" class="form-control" name="table_repeat" data-ng-model="module.table.repeat" placeholder="ng-repeat" maxlength="80">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
 						<label for="" class="col-xs-3 control-label">表格头</label>
 						<div class="col-xs-9">
 							<div class="btn-group" role="group">
@@ -31,7 +39,7 @@
 									添加表格头 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li data-ng-repeat="(key, val) in tc.types.thead"><a href="#" data-ng-click="tc.addItem('theads', module.table, key)">{{val}}</a></li>
+									<li data-ng-repeat="(key, val) in tc.types.thead"><a href="javascript:" data-ng-click="tc.addItem('theads', module.table, key)">{{val}}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -47,7 +55,7 @@
 							</tr>
 						</thead>
 						<tbody data-ng-if="module.table.theads">
-							<tr data-ng-repeat="th in module.table.theads">
+							<tr data-ng-repeat="th in module.table.theads track by $index">
 								<td>{{$index + 1}}</td>
 								<td>{{tc.types.thead[th.type]}}</td>
 								<td>{{th.name}}</td>
@@ -69,7 +77,7 @@
 									添加表格项 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="#" data-ng-click="tc.addItem('tbodies', module.table, key)">{{val}}</a></li>
+									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="javascript:" data-ng-click="tc.addItem('tbodies', module.table, key)">{{val}}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -85,7 +93,7 @@
 							</tr>
 						</thead>
 						<tbody data-ng-if="module.table.tbodies">
-							<tr data-ng-repeat="td in module.table.tbodies">
+							<tr data-ng-repeat="td in module.table.tbodies track by $index">
 								<td>{{$index + 1}}</td>
 								<td>{{tc.types.tbody[td.type]}}</td>
 								<td>{{td.name}}</td>

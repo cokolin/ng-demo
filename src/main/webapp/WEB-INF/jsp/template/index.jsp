@@ -37,16 +37,13 @@
 					<li>
 						<button class="btn btn-primary" type="button" data-ng-click="tc.tmplQueryExport()">查询导出模板</button>
 					</li>
-					<li>
-						<button class="btn btn-success" type="button" data-ng-click="tc.saveTmpl()">保存模板</button>
-					</li>
 				</ul>
 			</div>
 		</div>
 		<hr>
 		<div class="row">
 			<div class="col-xs-12">
-				<form name="tmplForm" class="form-horizontal">
+				<form name="tmplForm" class="form-horizontal" data-ng-submit="tc.saveTmpl()">
 					<fieldset data-ng-disabled="!tc.tmpl">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
@@ -60,7 +57,10 @@
 							<div class="form-group">
 								<label for="page" class="col-xs-2 control-label">页面</label>
 								<div class="col-xs-10">
-									<input type="text" class="form-control" name="page" data-ng-model="tc.tmpl.page" placeholder="实际的jsp文件名，无需后缀" maxlength="80" required>
+									<div class="input-group">
+										<span class="input-group-addon">/WEB-INF/jsp/basic/</span><input type="text" class="form-control" name="page" data-ng-model="tc.tmpl.page" placeholder="实际的jsp文件名" maxlength="80" required><span class="input-group-addon">.jsp</span>
+									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -76,7 +76,9 @@
 							<div class="form-group">
 								<label for="script" class="col-xs-2 control-label">脚本</label>
 								<div class="col-xs-10">
-									<input type="text" class="form-control" name="script" data-ng-model="tc.tmpl.script" placeholder="脚本文件名，无需后缀" maxlength="80" required>
+									<div class="input-group">
+										<span class="input-group-addon">/app/basic/</span><input type="text" class="form-control" name="script" data-ng-model="tc.tmpl.script" placeholder="脚本文件名" maxlength="80" required><span class="input-group-addon">.js</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -84,22 +86,27 @@
 							<div class="form-group">
 								<label for="controller" class="col-xs-2 control-label">控制器</label>
 								<div class="col-xs-10">
-									<input type="text" class="form-control" name="controller" data-ng-model="tc.tmpl.controller" placeholder="控制器名称" maxlength="80" required>
+									<div class="input-group">
+										<input type="text" class="form-control" name="controller" data-ng-model="tc.tmpl.controller" placeholder="控制器名称" maxlength="80" required><span class="input-group-addon">as vm</span>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
 								<label for="" class="col-xs-2 control-label">页面组件</label>
-								<div class="col-xs-10">
+								<div class="col-xs-6">
 									<div class="btn-group" role="group">
 										<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 											添加表单组件 <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu">
-											<li data-ng-repeat="(key, val) in tc.types.module"><a href="#" data-ng-click="tc.addModule(tc.tmpl, key, val)">{{val}}</a></li>
+											<li data-ng-repeat="(key, val) in tc.types.module"><a href="javascript:" data-ng-click="tc.addModule(tc.tmpl, key, val)">{{val}}</a></li>
 										</ul>
 									</div>
+								</div>
+								<div class="col-xs-4 text-right">
+									<button class="btn btn-success" type="submit" data-ng-disabled="tmplForm.$invalid">保存模板</button>
 								</div>
 							</div>
 						</div>

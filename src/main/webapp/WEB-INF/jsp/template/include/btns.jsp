@@ -22,6 +22,18 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-xs-2 control-label">禁用条件</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" name="btns_disabled" placeholder="ng-disabled" data-ng-model="tc.btns.disabled" maxlength="80">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">点击事件</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" name="btns_click" placeholder="ng-disabled" data-ng-model="tc.btns.click" maxlength="80">
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-xs-2 control-label">样式</label>
 							<div class="col-xs-10">
 								<input type="text" class="form-control" name="btns_clas" placeholder="样式，例如：btn-primary" data-ng-model="tc.btns.clas" maxlength="80" required>

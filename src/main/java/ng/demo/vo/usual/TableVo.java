@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class TableVo extends Element {
 	private static final long serialVersionUID = 1450727832026028792L;
 
+	/** ng-repeat */
+	private String repeat;
+
 	/** 表格的列表头 */
 	private List<THeadVo> theads;
 
@@ -24,6 +27,14 @@ public class TableVo extends Element {
 		super(name, clas);
 		this.theads = new ArrayList<>(4);
 		this.tbodies = new ArrayList<>(4);
+	}
+
+	public String getRepeat() {
+		return repeat;
+	}
+
+	public void setRepeat(String repeat) {
+		this.repeat = repeat;
 	}
 
 	public List<THeadVo> getTheads() {

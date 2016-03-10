@@ -34,6 +34,8 @@
 	function ButtonVo(){
 		this.type = null;
 		this.icon = null;
+		this.disabled = null;
+		this.click = null;
 		this.attrs = [];
 	}
 	ButtonVo.prototype = new EleVo();
@@ -70,8 +72,10 @@
 		this.placeholder = null;
 		this.disabled = null;
 		this.required = null;
-		this.readonly = null;
+		this.model = null;
+		this.value = null;
 		this.title = null;
+		this.reserve = null;
 		this.attrs = [];
 	}
 	InputVo.prototype = new EleVo();
@@ -249,7 +253,7 @@
 		      edit: null,
 		      save: null,
 		      del: function(){
-		      	$("#attrs_dialog").modal("hide");
+			      $("#attrs_dialog").modal("hide");
 		      },
 		    },
 		  },
@@ -257,7 +261,12 @@
 		    src: null,
 		    idx: null,
 		    obj: function(type){
-			    return new ColumVo().init(type);
+		    	var col = new ColumVo().init(type);
+		    	col.clas = "col-xs-12 col-sm-6 col-md-4";
+		    	col.label = "标签名称";
+		    	col.labClas = "col-xs-3";
+		    	col.iptClas = "col-xs-9";
+			    return col;
 		    },
 		    add: function(){
 			    var cfg = dat.cols;
@@ -320,14 +329,15 @@
 		    },
 		    add: function(){
 			    var cfg = dat.theads;
+			    var src = cfg.src;
 			    var idx = tc.thIndex - 1;
 			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
-				    cfg.src.push(tc.theads);
+			    	src.push(tc.theads);
 			    } else{
-				    var suf = cfg.src.slice(idx);
-				    cfg.src.push(tc.theads);
+				    var suf = src.slice(idx);
+				    src.splice(idx, src.length - idx, tc.theads);
 				    angular.forEach(suf, function(it){
-					    cfg.src.push(it);
+				    	src.push(it);
 				    });
 			    }
 		    },
@@ -355,14 +365,15 @@
 		    },
 		    add: function(){
 			    var cfg = dat.tbodies;
+			    var src = cfg.src;
 			    var idx = tc.tdIndex - 1;
 			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
-				    cfg.src.push(tc.tbodies);
+			    	src.push(tc.tbodies);
 			    } else{
-				    var suf = cfg.src.slice(idx);
-				    cfg.src.push(tc.tbodies);
+				    var suf = src.slice(idx);
+				    src.splice(idx, src.length - idx, tc.tbodies);
 				    angular.forEach(suf, function(it){
-					    cfg.src.push(it);
+				    	src.push(it);
 				    });
 			    }
 		    },
@@ -383,7 +394,7 @@
 		    },
 		  },
 		};
-		
+
 		tc.dat = dat;
 		tc.attrs = null;
 		tc.cols = null;
@@ -427,17 +438,15 @@
 		};
 
 		tc.saveItem = function(type){
-			var cfg = dat[type];
-			console.log(tc[type]);
+			var cfg = dat[type]; console.log(tc[type]);
+			if (cfg.callback.save && !cfg.callback.save()) return;
 			if (tc.addFlag[type]){
 				cfg.add();
 			} else{
 				cfg.edit();
 			}
 			tc[type] = null;
-			if (!cfg.callback.save || cfg.callback.save()){
-				$("#" + type + "_dialog").modal("hide");
-			}
+			$("#" + type + "_dialog").modal("hide");
 		};
 
 		tc.delItem = function(src, key, callback){
@@ -447,7 +456,7 @@
 			} else{
 				src[key] = null;
 			}
-			if(callback) callback();
+			if (callback) callback();
 		};
 
 		tc.tmplRest = function(){
@@ -463,7 +472,7 @@
 			tmpl.page = "query";
 			tmpl.title = "简单查询页面";
 			tmpl.script = "controllers";
-			tmpl.controller = "QueryController as vm";
+			tmpl.controller = "QueryController";
 			tmpl.addModule(normalModule("NORMAL"));
 			tc.tmpl = tmpl;
 		};
@@ -504,9 +513,9 @@
 		tc.addTable = function(module){
 			module.table = new TableVo();
 		};
-		
+
 		tc.disTheadButton = function(){
-			return !tc.theads || tc.theads.type != 'BUTTON' || tc.theads.btn;
+			return tc.theads && tc.theads.type == 'BUTTON' && !tc.theads.btn;
 		};
 
 		tc.addTheadButton = function(){
@@ -544,6 +553,9 @@
 
 		tc.saveTmpl = function(){
 			console.log(tc.tmpl);
+			$http.post("/template/save", tc.tmpl).success(function(resp){
+				tc.pages = resp;
+			});
 		};
 
 		tc.load = function(){

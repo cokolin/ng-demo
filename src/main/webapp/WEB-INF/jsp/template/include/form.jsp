@@ -75,7 +75,7 @@
 										添加按钮项 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
-										<li data-ng-repeat="(key, val) in tc.types.button"><a href="#" data-ng-click="tc.addItem('btns', module.form, key)">{{val}}</a></li>
+										<li data-ng-repeat="(key, val) in tc.types.button"><a href="javascript:" data-ng-click="tc.addItem('btns', module.form, key)">{{val}}</a></li>
 									</ul>
 								</div>
 							</li>
@@ -99,28 +99,30 @@
 						<thead>
 							<tr>
 								<th>表单栏</th>
-								<th>类型</th>
-								<th>名称</th>
-								<th>样式</th>
-								<th>属性</th>
+								<th>标签</th>
+								<th>表单项（类型，名称，占位符）</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr data-ng-repeat="ipt in module.form.ipts">
+							<tr data-ng-repeat="col in module.form.cols">
 								<td>{{$index + 1}}</td>
-								<td>{{tc.types.input[ipt.type]}}</td>
-								<td>{{ipt.name}}</td>
-								<td>{{ipt.clas}}</td>
+								<td>{{col.label}}</td>
 								<td>
-									<ul class="list-inline">
-										<li data-ng-repeat="attr in ipt.attrs">
-											<button class="btn btn-xs btn-default code" type="button" data-ng-click="tc.editItem('attrs', ipt, $index)">{{attr.name}}="{{attr.value}}"</button>
+									<ul style="margin-bottom: 0;">
+										<li data-ng-repeat="ipt in col.ipts">
+											<ul class="list-inline">
+												<li>{{tc.types.input[ipt.type]}}</li>
+												<li>{{ipt.name}}</li>
+												<li>{{ipt.placeholder}}</li>
+												<li><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('ipts', col, $index)">编辑项目</button></li>
+												<li><button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(col.ipts, $index)">删除项目</button></li>
+											</ul>
 										</li>
 									</ul>
 								</td>
-								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('cols', module.form, $index)">编辑</button>
-									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.form.cols, $index)">删除</button></td>
+								<td><button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('cols', module.form, $index)">编辑栏位</button>
+									<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(module.form.cols, $index)">删除栏位</button></td>
 							</tr>
 						</tbody>
 					</table>

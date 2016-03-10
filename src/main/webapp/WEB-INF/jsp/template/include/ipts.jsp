@@ -24,7 +24,7 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">样式</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" name="ipts_clas" placeholder="class" data-ng-model="tc.ipts.clas" maxlength="80" required>
+								<input type="text" class="form-control" name="ipts_clas" placeholder="class" data-ng-model="tc.ipts.clas" maxlength="80">
 							</div>
 						</div>
 						<div class="form-group">
@@ -46,15 +46,33 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xs-2 control-label">只读条件</label>
+							<label class="col-xs-2 control-label">关联模型</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" name="ipts_readonly" placeholder="ng-readonly" data-ng-model="tc.ipts.readonly" maxlength="80">
+								<input type="text" class="form-control" name="ipts_model" placeholder="ng-model" data-ng-model="tc.ipts.model" maxlength="80">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">默认值</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" name="ipts_value" placeholder="value" data-ng-model="tc.ipts.value" maxlength="80">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">默认值</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" name="ipts_value" placeholder="value" data-ng-model="tc.ipts.value" maxlength="80">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">提示标题</label>
 							<div class="col-xs-10">
 								<input type="text" class="form-control" name="ipts_title" placeholder="title" data-ng-model="tc.ipts.title" maxlength="80">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">备用内容</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" name="ipts_reserve" placeholder="ng-repeat, ng-click, ng-options 等的内容" data-ng-model="tc.ipts.reserve" maxlength="80">
 							</div>
 						</div>
 						<div class="form-group">

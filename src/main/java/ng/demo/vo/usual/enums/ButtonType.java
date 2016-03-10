@@ -14,6 +14,10 @@ public enum ButtonType implements BaseType {
 	private ButtonType(String value) {
 		this.value = value;
 	}
+	
+	public String getLowerName() {
+		return this.name().toLowerCase();
+	}
 
 	@Override
 	public String getValue() {

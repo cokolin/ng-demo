@@ -6,6 +6,10 @@ public class ButtonVo extends Element {
 	private static final long serialVersionUID = 4266272825869914856L;
 
 	private ButtonType type;
+	
+	private String disabled;
+	
+	private String click;
 
 	private String icon;
 
@@ -25,6 +29,22 @@ public class ButtonVo extends Element {
 
 	public void setType(ButtonType type) {
 		this.type = type;
+	}
+
+	public String getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(String disabled) {
+		this.disabled = disabled;
+	}
+
+	public String getClick() {
+		return click;
+	}
+
+	public void setClick(String click) {
+		this.click = click;
 	}
 
 	public String getIcon() {

@@ -2,8 +2,8 @@ package ng.demo.vo.usual.enums;
 
 public enum TBodyType implements BaseType {
 	TEXT("文本"),
-	RADIO("单选框"),
-	CHECKBOX("复选框"),
+	RADIO("单择框"),
+	CHECKBOX("复择框"),
 	BUTTONS("按钮组");
 
 	private String value;

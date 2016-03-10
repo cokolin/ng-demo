@@ -48,7 +48,7 @@
 										添加表单 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
-										<li data-ng-repeat="(type, text) in tc.types.form"><a href="#" data-ng-click="tc.addForm(module, type, text)">{{text}}</a></li>
+										<li data-ng-repeat="(type, text) in tc.types.form"><a href="javascript:" data-ng-click="tc.addForm(module, type, text)">{{text}}</a></li>
 									</ul>
 								</div>
 							</li>

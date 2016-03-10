@@ -18,13 +18,13 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">标签</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" name="cols_label" placeholder="标签" data-ng-model="tc.cols.label" maxlength="80" required>
+								<input type="text" class="form-control" name="cols_label" placeholder="标签" data-ng-model="tc.cols.label" maxlength="80">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">标签样式</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" name="cols_labClas" placeholder="标签样式，例如：col-xs-3" data-ng-model="tc.cols.labClas" maxlength="80" required>
+								<input type="text" class="form-control" name="cols_labClas" placeholder="标签样式，例如：col-xs-3" data-ng-model="tc.cols.labClas" maxlength="80" data-ng-required="tc.cols.label != null && tc.cols.label.length > 0">
 							</div>
 						</div>
 						<div class="form-group">
@@ -68,8 +68,8 @@
 										</ul>
 									</td>
 									<td>
-										<button type="button" class="btn btn-danger" data-ng-click="tc.delItem(tc.cols.ipts, $index)">删除</button>
-										<button type="button" class="btn btn-warning" data-ng-click="tc.editItem('ipts', tc.cols, $index)">编辑</button>
+										<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(tc.cols.ipts, $index)">删除</button>
+										<button type="button" class="btn btn-xs btn-warning" data-ng-click="tc.editItem('ipts', tc.cols, $index)">编辑</button>
 									</td>
 								</tr>
 							</tbody>

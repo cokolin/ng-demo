@@ -9,23 +9,27 @@ public class InputVo extends Element {
 	private InputType type;
 
 	/**
-	 * 对于静态项，placeholder 就是项目值；
-	 * 对于单、多选框，placeholder 就是注释；
-	 * 对于下拉列表，placeholder 就是默认选项的说明；
+	 * 对于静态项，placeholder 就是项目值； 对于单、多选框，placeholder 就是注释； 对于下拉列表，placeholder 就是默认选项的说明；
 	 */
 	private String placeholder;
 
+	/** 必填条件 */
+	private String required;
+	
 	/** 禁用条件 */
 	private String disabled;
 
-	/** 必填条件 */
-	private String required;
-
-	/** 只读条件 */
-	private String readonly;
-
+	/** 关联模型 */
+	private String model;
+	
+	/** 默认值 */
+	private String value;
+	
 	/** 提示标题 */
 	private String title;
+	
+	/** 备用内容 */
+	private String reserve;
 
 	public InputVo() {
 		super();
@@ -52,14 +56,6 @@ public class InputVo extends Element {
 		this.placeholder = placeholder;
 	}
 
-	public String getDisabled() {
-		return disabled;
-	}
-
-	public void setDisabled(String disabled) {
-		this.disabled = disabled;
-	}
-
 	public String getRequired() {
 		return required;
 	}
@@ -68,12 +64,28 @@ public class InputVo extends Element {
 		this.required = required;
 	}
 
-	public String getReadonly() {
-		return readonly;
+	public String getDisabled() {
+		return disabled;
 	}
 
-	public void setReadonly(String readonly) {
-		this.readonly = readonly;
+	public void setDisabled(String disabled) {
+		this.disabled = disabled;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public String getTitle() {
@@ -82,6 +94,14 @@ public class InputVo extends Element {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(String reserve) {
+		this.reserve = reserve;
 	}
 
 }
