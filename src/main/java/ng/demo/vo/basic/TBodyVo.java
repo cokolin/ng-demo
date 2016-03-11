@@ -1,11 +1,11 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ng.demo.vo.usual.enums.TBodyType;
+import ng.demo.vo.basic.enums.TBodyType;
 
 public class TBodyVo extends Element {
 	private static final long serialVersionUID = 4012663502166413938L;

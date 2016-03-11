@@ -1,6 +1,6 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
-import ng.demo.vo.usual.enums.InputType;
+import ng.demo.vo.basic.enums.InputType;
 
 public class InputVo extends Element {
 	private static final long serialVersionUID = -4381437395133116916L;

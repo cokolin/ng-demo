@@ -1,4 +1,4 @@
-package ng.demo.vo.usual.enums;
+package ng.demo.vo.basic.enums;
 
 public enum ModuleType implements BaseType {
 	NORMAL("普通表单组件"), DIALOG("对话框表单组件");

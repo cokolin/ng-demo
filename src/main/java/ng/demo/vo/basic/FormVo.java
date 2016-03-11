@@ -1,11 +1,11 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ng.demo.vo.usual.enums.FormType;
+import ng.demo.vo.basic.enums.FormType;
 
 public class FormVo extends Element {
 	private static final long serialVersionUID = -8946957435827704134L;
@@ -27,6 +27,9 @@ public class FormVo extends Element {
 
 	/** 表单的 ng-disabled */
 	private String disabled;
+	
+	/** 按钮行的样式类 */
+	private String btnColClas;
 
 	/** 表单的输入项 */
 	private List<ColumVo> cols;
@@ -93,6 +96,14 @@ public class FormVo extends Element {
 
 	public void setDisabled(String disabled) {
 		this.disabled = disabled;
+	}
+
+	public String getBtnColClas() {
+		return btnColClas;
+	}
+
+	public void setBtnColClas(String btnColClas) {
+		this.btnColClas = btnColClas;
 	}
 
 	public List<ColumVo> getCols() {

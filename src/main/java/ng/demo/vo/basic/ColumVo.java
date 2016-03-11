@@ -1,4 +1,4 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
 import java.util.ArrayList;
 import java.util.List;

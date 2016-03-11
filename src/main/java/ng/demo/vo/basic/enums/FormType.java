@@ -1,4 +1,4 @@
-package ng.demo.vo.usual.enums;
+package ng.demo.vo.basic.enums;
 
 public enum FormType implements BaseType {
 	NORMAL("基本表单", ""),

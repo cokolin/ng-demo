@@ -1,6 +1,6 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
-import ng.demo.vo.usual.enums.THeadType;
+import ng.demo.vo.basic.enums.THeadType;
 
 public class THeadVo extends Element {
 	private static final long serialVersionUID = -3171539941509331999L;

@@ -1,4 +1,4 @@
-package ng.demo.vo.usual.enums;
+package ng.demo.vo.basic.enums;
 
 public enum ButtonType implements BaseType {
 	SUBMIT("提交按钮"),

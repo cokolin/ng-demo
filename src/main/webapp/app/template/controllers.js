@@ -51,6 +51,7 @@
 		this.method = null;
 		this.submit = null;
 		this.disabled = null;
+		this.btnColClas = null;
 		this.cols = [];
 		this.btns = [];
 		this.attrs = [];
@@ -104,7 +105,6 @@
 		this.form = null;
 		this.size = null;
 		this.table = null;
-		this.btnColClas = null;
 		this.pagination = false;
 		this.attrs = [];
 	}
@@ -115,6 +115,7 @@
 	}
 
 	function TableVo(){
+		this.repeat = null;
 		this.theads = [];
 		this.tbodies = [];
 		this.attrs = [];
@@ -173,9 +174,12 @@
 		form.method = "get";
 		form.name = "queryForm";
 		form.submit = "vm.doSubmit()";
+		form.url = "/template/demo-query";
+		form.extUrl = "/template/demo-export";
+		form.btnColClas = "col-xs-12 col-md-8";
 		form.addAttr("autocomplete", "off");
 		{
-			var btn = new ButtonVo();
+			let btn = new ButtonVo();
 			btn.type = "SUBMIT";
 			btn.clas = "btn-primary";
 			btn.name = "查询";
@@ -183,27 +187,213 @@
 			btn.addAttr("ng-disabled", "vm.queryNow || queryForm.$invalid");
 			form.addBtn(btn);
 		}
+		{
+			let col = new ColumVo().init("名称");
+			col.clas = "col-xs-12 col-sm-6 col-md-4";
+			col.labClas = "col-xs-3";
+			col.iptClas = "col-xs-9";
+			{
+				let ipt = new InputVo().init("TEXT");
+				ipt.placeholder = "名称";
+				ipt.model = "vm.args.name";
+				col.addIpt(ipt);
+			}
+			form.addCol(col);
+		}
+		{
+			let col = new ColumVo().init("类型");
+			col.clas = "col-xs-12 col-sm-6 col-md-4";
+			col.labClas = "col-xs-3";
+			col.iptClas = "col-xs-9";
+			{
+				let ipt = new InputVo().init("TEXT");
+				ipt.placeholder = "类型";
+				ipt.model = "vm.args.type";
+				col.addIpt(ipt);
+			}
+			form.addCol(col);
+		}
+		{
+			let col = new ColumVo().init("状态");
+			col.clas = "col-xs-12 col-sm-6 col-md-4";
+			col.labClas = "col-xs-3";
+			col.iptClas = "col-xs-9";
+			{
+				let ipt = new InputVo().init("TEXT");
+				ipt.placeholder = "状态";
+				ipt.model = "vm.args.status";
+				col.addIpt(ipt);
+			}
+			form.addCol(col);
+		}
+		{
+			let col = new ColumVo().init("修改人");
+			col.clas = "col-xs-12 col-sm-6 col-md-4";
+			col.labClas = "col-xs-3";
+			col.iptClas = "col-xs-9";
+			{
+				let ipt = new InputVo().init("TEXT");
+				ipt.placeholder = "修改人";
+				ipt.model = "vm.args.updateBy";
+				col.addIpt(ipt);
+			}
+			form.addCol(col);
+		}
 		return form;
 	}
 
 	var normalModule = function(type){
 		var module = new ModuleVo();
 		module.type = type;
-		module.btnColClas = "col-xs-12";
 		module.pagination = true;
 		module.form = queryForm("HORIZONTAL");
 		{
-			var table = new TableVo();
+			let table = new TableVo();
+			table.name = "query_table";
+			table.repeat = "it in vm.queryList";
 			table.clas = "table-striped table-bordered table-hover table-condensed";
 			{
-				var thead = new THeadVo().init("TEXT");
+				let thead = new THeadVo().init("TEXT");
 				thead.name = "#";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				var tbody = new TBodyVo().init("TEXT");
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "主键";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "名称";
+				thead.clas = "text-left";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "备注";
+				thead.clas = "text-left";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "类型";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "状态";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "单价";
+				thead.clas = "text-right";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "数量";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "折扣";
+				thead.clas = "text-right";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "修改人";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "修改时间";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			{
+				let thead = new THeadVo().init("TEXT");
+				thead.name = "已删除";
+				thead.clas = "text-center";
+				table.addThead(thead);
+			}
+			//=======================================
+			{
+				let tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{$index+1}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.id}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.name}}";
+				tbody.clas = "text-left";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.remark}}";
+				tbody.clas = "text-left";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.type}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.status}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.price | number:2}}";
+				tbody.clas = "text-right";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.quantity}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.discount ? ((it.discount * 100) + '%') : '0%'}}";
+				tbody.clas = "text-right";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.updateBy}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}";
+				tbody.clas = "text-center";
+				table.addTbody(tbody);
+			}
+			{
+				let tbody = new TBodyVo().init("TEXT");
+				tbody.name = "{{it.deleted ? '否' : '是'}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
@@ -215,7 +405,6 @@
 	var dialogModule = function(type){
 		var module = new ModuleVo();
 		module.type = type;
-		module.btnColClas = "";
 		module.pagination = false;
 		module.form = queryForm("HORIZONTAL");
 		console.log(module);
@@ -470,7 +659,7 @@
 		tc.tmplQuery = function(){
 			var tmpl = new TemplateVo();
 			tmpl.page = "query";
-			tmpl.title = "简单查询页面";
+			tmpl.title = "查询示例页面";
 			tmpl.script = "controllers";
 			tmpl.controller = "QueryController";
 			tmpl.addModule(normalModule("NORMAL"));

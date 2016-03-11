@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<ul class="list-inline">
-					<li data-ng-repeat="(key, val) in tc.pages"><a target="tmpl_demo" data-ng-href="/template/{{key}}">{{val}}</a></li>
+					<li data-ng-repeat="(key, val) in tc.pages"><a target="tmpl_demo" data-ng-href="/template/show/{{key}}">{{val}}</a></li>
 				</ul>
 			</div>
 		</div>

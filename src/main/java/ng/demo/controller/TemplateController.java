@@ -1,7 +1,10 @@
 package ng.demo.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -9,20 +12,22 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
-import ng.demo.vo.usual.TemplateVo;
-import ng.demo.vo.usual.enums.BaseType;
-import ng.demo.vo.usual.enums.ButtonType;
-import ng.demo.vo.usual.enums.FormType;
-import ng.demo.vo.usual.enums.InputType;
-import ng.demo.vo.usual.enums.ModuleType;
-import ng.demo.vo.usual.enums.TBodyType;
-import ng.demo.vo.usual.enums.THeadType;
+import ng.demo.vo.DemoVo;
+import ng.demo.vo.basic.TemplateVo;
+import ng.demo.vo.basic.enums.BaseType;
+import ng.demo.vo.basic.enums.ButtonType;
+import ng.demo.vo.basic.enums.FormType;
+import ng.demo.vo.basic.enums.InputType;
+import ng.demo.vo.basic.enums.ModuleType;
+import ng.demo.vo.basic.enums.TBodyType;
+import ng.demo.vo.basic.enums.THeadType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +52,7 @@ public class TemplateController {
 
 	@ResponseBody
 	@RequestMapping("save")
-	public Object save(TemplateVo vo) {
+	public Object save(@RequestBody TemplateVo vo) {
 		logger.info(vo);
 		map.put(vo.getCode(), vo);
 		return pages();
@@ -101,7 +106,7 @@ public class TemplateController {
 			length = 10;
 		}
 		Map<String, Object> resp = new TreeMap<>();
-		List<Map<String, Object>> data = new ArrayList<>();
+		List<DemoVo> data = new ArrayList<>();
 		int count = 1234;
 		if (start < count) {
 			int len = count - start;
@@ -119,24 +124,30 @@ public class TemplateController {
 	public void demoExport(HttpServletResponse response) throws IOException {
 		Map<String, Object> resp = new TreeMap<>();
 		int count = 1600;
-		List<Map<String, Object>> data = this.demoData(count);
+		List<DemoVo> data = this.demoData(count);
 		resp.put("data", data);
 		resp.put("count", count);
 		response.setHeader("Content-Disposition", "attachment; filename=data.json");
 		response.getWriter().write(JSON.toJSONString(resp));
 	}
-	
-	private List<Map<String, Object>> demoData(int len){
+
+	private List<DemoVo> demoData(int len) {
 		Random ran = new Random();
-		List<Map<String, Object>> data = new ArrayList<>();
-		for (int i = 0; i < len; i++) {
-			Map<String, Object> map = new TreeMap<>();
-			map.put("id", ran.nextLong());
-			map.put("bool", ran.nextBoolean());
-			map.put("amount", ran.nextInt() * ran.nextDouble());
-			map.put("rate", ran.nextFloat());
-			map.put("qty", ran.nextInt());
-			data.add(map);
+		List<DemoVo> data = new ArrayList<>();
+		for (long i = 0; i < len; i++) {
+			DemoVo vo = new DemoVo();
+			vo.setId(i);
+			vo.setName("名称" + i);
+			vo.setRemark("备注" + ran.nextInt(len));
+			vo.setType("type" + ran.nextInt(len));
+			vo.setStatus("status" + ran.nextInt(len));
+			vo.setPrice(BigDecimal.valueOf(ran.nextDouble() * len).setScale(2, RoundingMode.HALF_UP));
+			vo.setQuantity(BigDecimal.valueOf(ran.nextInt(len)));
+			vo.setDiscount(BigDecimal.valueOf(ran.nextDouble()).setScale(4, RoundingMode.HALF_UP));
+			vo.setUpdateBy("更新人" + ran.nextInt(len));
+			vo.setUpdateTime(new Date(System.currentTimeMillis() + ran.nextInt(len)));
+			vo.setDeleted((byte) 0);
+			data.add(vo);
 		}
 		return data;
 	}

@@ -64,6 +64,14 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
+						<label for="" class="col-xs-3 control-label">禁用条件</label>
+						<div class="col-xs-9">
+							<input type="text" class="form-control" name="form_btnColClas" data-ng-model="module.form.btnColClas" placeholder="例如：col-xs-12" maxlength="80">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
 						<label for="" class="col-xs-3 control-label">表单项目</label>
 						<ul class="list-inline col-xs-9">
 							<li>
@@ -85,7 +93,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-xs-12">
+				<div class="col-xs-6">
 					<div class="form-group">
 						<ul class="list-inline col-xs-12 text-right">
 							<li data-ng-repeat="attr in module.form.attrs">

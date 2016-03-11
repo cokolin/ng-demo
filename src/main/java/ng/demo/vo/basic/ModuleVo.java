@@ -1,6 +1,6 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
-import ng.demo.vo.usual.enums.ModuleType;
+import ng.demo.vo.basic.enums.ModuleType;
 
 public class ModuleVo extends Element {
 	private static final long serialVersionUID = -5403286179689788062L;
@@ -16,9 +16,6 @@ public class ModuleVo extends Element {
 
 	/** 表格 */
 	private TableVo table;
-
-	/** 按钮行的样式类 */
-	private String btnColClas;
 
 	/** 是否包含分页组件 */
 	private boolean pagination;
@@ -53,14 +50,6 @@ public class ModuleVo extends Element {
 
 	public void setTable(TableVo table) {
 		this.table = table;
-	}
-
-	public String getBtnColClas() {
-		return btnColClas;
-	}
-
-	public void setBtnColClas(String btnColClas) {
-		this.btnColClas = btnColClas;
 	}
 
 	public boolean isPagination() {

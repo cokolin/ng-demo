@@ -1,6 +1,6 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
-import ng.demo.vo.usual.enums.ButtonType;
+import ng.demo.vo.basic.enums.ButtonType;
 
 public class ButtonVo extends Element {
 	private static final long serialVersionUID = 4266272825869914856L;

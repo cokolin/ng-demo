@@ -10,7 +10,7 @@
 	<div class="container-fluid" data-ng-controller="${tmpl.controller} as vm">
 		<c:if test="${tmpl.modules ne null}">
 			<c:forEach items="${tmpl.modules}" var="module">
-				<c:if test="${module.type eq 'NORMAL'}">
+				<c:if test="${module.type.key eq 'NORMAL'}">
 					<div class="row ${module.clas}">
 						<div class="col-xs-12">
 							<%@include file="include/form.jsp"%>
@@ -18,12 +18,12 @@
 						</div>
 						<c:if test="${module.pagination}">
 							<div class="col-xs-12">
-								分页内容
+								分页内容，本工程暂缺
 							</div>
 						</c:if>
 					</div>
 				</c:if>
-				<c:if test="${module.type eq 'DIALOG'}">
+				<c:if test="${module.type.key eq 'DIALOG'}">
 					<%-- TODO --%>
 				</c:if>
 			</c:forEach>

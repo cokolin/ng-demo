@@ -24,14 +24,6 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label for="" class="col-xs-3 control-label">按钮行样式</label>
-						<div class="col-xs-9">
-							<input type="text" class="form-control" name="btnColClas" data-ng-model="module.btnColClas" placeholder="例如: col-xs-12 col-sm-6" maxlength="80" data-ng-required="module.type == 'NORMAL'">
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
 						<label for="" class="col-xs-3 control-label">组件规格</label>
 						<div class="col-xs-9">
 							<input type="text" class="form-control" name="module_size" data-ng-model="module.size" placeholder="组件的规格，例如：modal-lg" maxlength="80">

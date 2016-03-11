@@ -32,8 +32,8 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group">
-						<label for="" class="col-xs-3 control-label">表格头</label>
-						<div class="col-xs-9">
+						<label class="col-xs-3 control-label">表格内容</label>
+						<div class="col-xs-4">
 							<div class="btn-group" role="group">
 								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
 									添加表格头 <span class="caret"></span>
@@ -43,11 +43,23 @@
 								</ul>
 							</div>
 						</div>
+						<div class="col-xs-4">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+									添加表格项 <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="javascript:" data-ng-click="tc.addItem('tbodies', module.table, key)">{{val}}</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th>表格头</th>
 								<th>类型</th>
 								<th>名称</th>
 								<th>样式</th>
@@ -69,23 +81,10 @@
 					</table>
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<div class="form-group">
-						<label for="" class="col-xs-3 control-label">表格项</label>
-						<div class="col-xs-9">
-							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-									添加表格项 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li data-ng-repeat="(key, val) in tc.types.tbody"><a href="javascript:" data-ng-click="tc.addItem('tbodies', module.table, key)">{{val}}</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
 					<table class="table table-striped table-condensed">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th>表格项</th>
 								<th>类型</th>
 								<th>名称</th>
 								<th>样式</th>

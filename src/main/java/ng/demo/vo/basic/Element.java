@@ -1,11 +1,11 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ng.demo.vo.usual.AttrVo;
+import ng.demo.vo.basic.AttrVo;
 import ng.demo.base.BaseModel;
 
 public class Element extends BaseModel {

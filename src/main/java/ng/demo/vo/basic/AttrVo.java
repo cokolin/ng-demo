@@ -1,4 +1,4 @@
-package ng.demo.vo.usual;
+package ng.demo.vo.basic;
 
 import ng.demo.base.BaseModel;
 
