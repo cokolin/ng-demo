@@ -176,24 +176,17 @@
 		form.submit = "vm.doSubmit()";
 		form.url = "/template/demo-query";
 		form.extUrl = "/template/demo-export";
-		form.btnColClas = "col-xs-12 col-md-8";
+		form.btnColClas = "col-xs-12 col-md-8 text-center";
 		form.addAttr("autocomplete", "off");
 		{
-			let btn = new ButtonVo();
-			btn.type = "SUBMIT";
-			btn.clas = "btn-primary";
-			btn.name = "查询";
-			btn.icon = ICONS[10];
-			btn.addAttr("ng-disabled", "vm.queryNow || queryForm.$invalid");
-			form.addBtn(btn);
-		}
-		{
-			let col = new ColumVo().init("名称");
+			let
+			col = new ColumVo().init("名称");
 			col.clas = "col-xs-12 col-sm-6 col-md-4";
 			col.labClas = "col-xs-3";
 			col.iptClas = "col-xs-9";
 			{
-				let ipt = new InputVo().init("TEXT");
+				let
+				ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "名称";
 				ipt.model = "vm.args.name";
 				ipt.name = "name";
@@ -202,12 +195,14 @@
 			form.addCol(col);
 		}
 		{
-			let col = new ColumVo().init("类型");
+			let
+			col = new ColumVo().init("类型");
 			col.clas = "col-xs-12 col-sm-6 col-md-4";
 			col.labClas = "col-xs-3";
 			col.iptClas = "col-xs-9";
 			{
-				let ipt = new InputVo().init("TEXT");
+				let
+				ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "类型";
 				ipt.model = "vm.args.type";
 				ipt.name = "type";
@@ -216,12 +211,14 @@
 			form.addCol(col);
 		}
 		{
-			let col = new ColumVo().init("状态");
+			let
+			col = new ColumVo().init("状态");
 			col.clas = "col-xs-12 col-sm-6 col-md-4";
 			col.labClas = "col-xs-3";
 			col.iptClas = "col-xs-9";
 			{
-				let ipt = new InputVo().init("TEXT");
+				let
+				ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "状态";
 				ipt.model = "vm.args.status";
 				ipt.name = "status";
@@ -230,18 +227,42 @@
 			form.addCol(col);
 		}
 		{
-			let col = new ColumVo().init("修改人");
+			let
+			col = new ColumVo().init("修改人");
 			col.clas = "col-xs-12 col-sm-6 col-md-4";
 			col.labClas = "col-xs-3";
 			col.iptClas = "col-xs-9";
 			{
-				let ipt = new InputVo().init("TEXT");
+				let
+				ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "修改人";
 				ipt.model = "vm.args.updateBy";
 				ipt.name = "updateBy";
 				col.addIpt(ipt);
 			}
 			form.addCol(col);
+		}
+		// --------------------------------------------
+		{
+			let
+			btn = new ButtonVo();
+			btn.type = "SUBMIT";
+			btn.clas = "btn-primary";
+			btn.name = "查询";
+			btn.icon = ICONS[10];
+			btn.addAttr("ng-disabled", "vm.queryNow || queryForm.$invalid");
+			form.addBtn(btn);
+		}
+		{
+			let
+			btn = new ButtonVo();
+			btn.type = "BUTTON";
+			btn.clas = "btn-success";
+			btn.name = "导出";
+			btn.icon = "glyphicon glyphicon-export";
+			btn.addAttr("ng-click", "vm.doExport()");
+			btn.addAttr("ng-disabled", "vm.exportNow || vm.queryNow || queryForm.$invalid");
+			form.addBtn(btn);
 		}
 		return form;
 	}
@@ -252,151 +273,176 @@
 		module.pagination = true;
 		module.form = queryForm("HORIZONTAL");
 		{
-			let table = new TableVo();
+			let
+			table = new TableVo();
 			table.name = "query_table";
 			table.repeat = "it in vm.queryList";
 			table.clas = "table-striped table-bordered table-hover table-condensed";
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "#";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "主键";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "名称";
 				thead.clas = "text-left";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "备注";
 				thead.clas = "text-left";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "类型";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "状态";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "单价";
 				thead.clas = "text-right";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "数量";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "折扣";
 				thead.clas = "text-right";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "修改人";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "修改时间";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
 			{
-				let thead = new THeadVo().init("TEXT");
+				let
+				thead = new THeadVo().init("TEXT");
 				thead.name = "已删除";
 				thead.clas = "text-center";
 				table.addThead(thead);
 			}
-			//=======================================
+			// =======================================
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{$index+1}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.id}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.name}}";
 				tbody.clas = "text-left";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.remark}}";
 				tbody.clas = "text-left";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.type}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.status}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.price | number:2}}";
 				tbody.clas = "text-right";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.quantity}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.discount ? ((it.discount * 100) + '%') : '0%'}}";
 				tbody.clas = "text-right";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.updateBy}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
 			}
 			{
-				let tbody = new TBodyVo().init("TEXT");
+				let
+				tbody = new TBodyVo().init("TEXT");
 				tbody.name = "{{it.deleted ? '否' : '是'}}";
 				tbody.clas = "text-center";
 				table.addTbody(tbody);
@@ -454,11 +500,11 @@
 		    src: null,
 		    idx: null,
 		    obj: function(type){
-		    	var col = new ColumVo().init(type);
-		    	col.clas = "col-xs-12 col-sm-6 col-md-4";
-		    	col.label = "标签名称";
-		    	col.labClas = "col-xs-3";
-		    	col.iptClas = "col-xs-9";
+			    var col = new ColumVo().init(type);
+			    col.clas = "col-xs-12 col-sm-6 col-md-4";
+			    col.label = "标签名称";
+			    col.labClas = "col-xs-3";
+			    col.iptClas = "col-xs-9";
 			    return col;
 		    },
 		    add: function(){
@@ -525,12 +571,12 @@
 			    var src = cfg.src;
 			    var idx = tc.thIndex - 1;
 			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
-			    	src.push(tc.theads);
+				    src.push(tc.theads);
 			    } else{
 				    var suf = src.slice(idx);
 				    src.splice(idx, src.length - idx, tc.theads);
 				    angular.forEach(suf, function(it){
-				    	src.push(it);
+					    src.push(it);
 				    });
 			    }
 		    },
@@ -561,12 +607,12 @@
 			    var src = cfg.src;
 			    var idx = tc.tdIndex - 1;
 			    if (cfg.idx == 0 || idx < 0 || idx >= cfg.idx){// 无数据或序列比当前序列大
-			    	src.push(tc.tbodies);
+				    src.push(tc.tbodies);
 			    } else{
 				    var suf = src.slice(idx);
 				    src.splice(idx, src.length - idx, tc.tbodies);
 				    angular.forEach(suf, function(it){
-				    	src.push(it);
+					    src.push(it);
 				    });
 			    }
 		    },
@@ -631,7 +677,8 @@
 		};
 
 		tc.saveItem = function(type){
-			var cfg = dat[type]; console.log(tc[type]);
+			var cfg = dat[type];
+			console.log(tc[type]);
 			if (cfg.callback.save && !cfg.callback.save()) return;
 			if (tc.addFlag[type]){
 				cfg.add();
@@ -650,40 +697,6 @@
 				src[key] = null;
 			}
 			if (callback) callback();
-		};
-
-		tc.tmplRest = function(){
-			tc.tmpl = null;
-		};
-
-		tc.tmplBase = function(){
-			tc.tmpl = new TemplateVo();
-		};
-
-		tc.tmplQuery = function(){
-			var tmpl = new TemplateVo();
-			tmpl.page = "query";
-			tmpl.title = "查询示例页面";
-			tmpl.script = "controllers";
-			tmpl.controller = "QueryController";
-			tmpl.addModule(normalModule("NORMAL"));
-			tc.tmpl = tmpl;
-		};
-
-		tc.tmplQueryExport = function(){
-			tc.tmplQuery();
-			var tmpl = tc.tmpl;
-			var form = tmpl.modules[0].form;
-			{
-				var btn = new ButtonVo();
-				btn.type = "BUTTON";
-				btn.clas = "btn-success";
-				btn.name = "导出";
-				btn.icon = "glyphicon glyphicon-export";
-				btn.addAttr("ng-click", "vm.doExport()");
-				btn.addAttr("ng-disabled", "vm.exportNow || vm.queryNow || queryForm.$invalid");
-				form.addBtn(btn);
-			}
 		};
 
 		tc.addModule = function(tmpl, key, val){
@@ -744,19 +757,56 @@
 			tc.theads.btn = null;
 		};
 
-		tc.saveTmpl = function(){
+		tc.tmplRest = function(){
+			tc.tmpl = new TemplateVo();
+		};
+
+		tc.tmplQuery = function(){
+			var tmpl = new TemplateVo();
+			tmpl.page = "query";
+			tmpl.title = "查询示例页面";
+			tmpl.script = "controllers";
+			tmpl.controller = "QueryController";
+			tmpl.addModule(normalModule("NORMAL"));
+			tc.tmpl = tmpl;
+		};
+
+		tc.tmplLoad = function(key){
+			$http.get("/template/load", {
+				params: {
+					code: key
+				}
+			}).success(function(resp){
+				if (resp.status == 0){
+					tc.tmpl = resp.data;
+				} else{
+					window.alert("模板未找到！");
+				}
+			});
+		};
+
+		tc.addTmpl = function(){
 			console.log(tc.tmpl);
-			$http.post("/template/save", tc.tmpl).success(function(resp){
-				tc.pages = resp;
+			$http.post("/template/add", tc.tmpl).success(function(resp){
+				if (resp.status == 401){
+					if (window.confirm("该页面已经存在，确定保存修改？")){
+						$http.post("/template/edit", tc.tmpl).success(function(resp1){
+							tc.pages = resp1.data;
+						});
+					}
+				} else{
+					window.alert("模板保存成功！");
+					tc.pages = resp.data;
+				}
 			});
 		};
 
 		tc.load = function(){
 			$http.get("/template/pages").success(function(resp){
-				tc.pages = resp;
+				tc.pages = resp.data;
 			});
 			$http.get("/template/types").success(function(resp){
-				tc.types = resp;
+				tc.types = resp.data;
 			});
 			tc.tmplRest();
 		};

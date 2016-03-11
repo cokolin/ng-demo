@@ -16,26 +16,15 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<ul class="list-inline">
-					<li data-ng-repeat="(key, val) in tc.pages"><a target="tmpl_demo" data-ng-href="/template/show/{{key}}">{{val}}</a></li>
-				</ul>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-xs-12">
-				<ul class="list-inline">
 					<li><strong>模板</strong></li>
 					<li>
-						<button class="btn btn-danger" type="button" data-ng-click="tc.tmplRest()">重置</button>
+						<button class="btn btn-danger" type="button" data-ng-click="tc.tmplRest()">重置数据</button>
 					</li>
 					<li>
-						<button class="btn btn-primary" type="button" data-ng-click="tc.tmplBase()">基础模板</button>
+						<button class="btn btn-primary" type="button" data-ng-click="tc.tmplQuery()">示例模板</button>
 					</li>
-					<li>
-						<button class="btn btn-primary" type="button" data-ng-click="tc.tmplQuery()">单独查询模板</button>
-					</li>
-					<li>
-						<button class="btn btn-primary" type="button" data-ng-click="tc.tmplQueryExport()">查询导出模板</button>
+					<li data-ng-repeat="(key, val) in tc.pages">
+						<button class="btn btn-info" type="button" data-ng-click="tc.tmplLoad(key)">{{val}}</button>
 					</li>
 				</ul>
 			</div>
@@ -43,7 +32,7 @@
 		<hr>
 		<div class="row">
 			<div class="col-xs-12">
-				<form name="tmplForm" class="form-horizontal" data-ng-submit="tc.saveTmpl()">
+				<form name="tmplForm" class="form-horizontal" data-ng-submit="tc.addTmpl()">
 					<fieldset data-ng-disabled="!tc.tmpl">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
@@ -60,7 +49,7 @@
 									<div class="input-group">
 										<span class="input-group-addon">/WEB-INF/jsp/basic/</span><input type="text" class="form-control" name="page" data-ng-model="tc.tmpl.page" placeholder="实际的jsp文件名" maxlength="80" required><span class="input-group-addon">.jsp</span>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>

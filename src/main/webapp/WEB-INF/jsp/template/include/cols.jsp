@@ -68,8 +68,8 @@
 										</ul>
 									</td>
 									<td>
+										<button type="button" class="btn btn-xs btn-primary" data-ng-click="tc.editItem('ipts', tc.cols, $index)">编辑</button>
 										<button type="button" class="btn btn-xs btn-danger" data-ng-click="tc.delItem(tc.cols.ipts, $index)">删除</button>
-										<button type="button" class="btn btn-xs btn-warning" data-ng-click="tc.editItem('ipts', tc.cols, $index)">编辑</button>
 									</td>
 								</tr>
 							</tbody>

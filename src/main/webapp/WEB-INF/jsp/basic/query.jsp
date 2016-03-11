@@ -12,14 +12,10 @@
 			<c:forEach items="${tmpl.modules}" var="module">
 				<c:if test="${module.type.key eq 'NORMAL'}">
 					<div class="row ${module.clas}">
-						<div class="col-xs-12">
-							<%@include file="include/form.jsp"%>
-							<%@include file="include/table.jsp"%>
-						</div>
+						<%@include file="include/form.jsp"%>
+						<%@include file="include/table.jsp"%>
 						<c:if test="${module.pagination}">
-							<div class="col-xs-12">
-								分页内容，本工程暂缺
-							</div>
+							<div class="col-xs-12">分页内容，本工程暂缺</div>
 						</c:if>
 					</div>
 				</c:if>

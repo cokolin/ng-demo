@@ -51,16 +51,54 @@ public class TemplateController {
 	}
 
 	@ResponseBody
-	@RequestMapping("save")
-	public Object save(@RequestBody TemplateVo vo) {
+	@RequestMapping("add")
+	public Object add(@RequestBody TemplateVo vo) {
 		logger.info(vo);
-		map.put(vo.getCode(), vo);
-		return pages();
+		Map<String, Object> resp = new TreeMap<>();
+		if (map.containsKey(vo.getCode())) {
+			resp.put("status", 401);
+		} else {
+			map.put(vo.getCode(), vo);
+			resp.put("status", 0);
+			resp.put("data", pageMap());
+		}
+		return resp;
 	}
+
+	@ResponseBody
+	@RequestMapping("edit")
+	public Object edit(@RequestBody TemplateVo vo) {
+		logger.info(vo);
+		Map<String, Object> resp = new TreeMap<>();
+		map.put(vo.getCode(), vo);
+		resp.put("status", 0);
+		resp.put("data", pageMap());
+		return resp;
+	}
+
+	@ResponseBody
+	@RequestMapping("load")
+	public Object load(String code) {
+		logger.info(code);
+		Map<String, Object> resp = new TreeMap<>();
+		TemplateVo vo = map.get(code);
+		if (vo != null) {
+			resp.put("status", 0);
+			resp.put("data", vo);
+		} else {
+			resp.put("status", 404);
+		}
+		return resp;
+	}
+
+
 
 	@ResponseBody
 	@RequestMapping("types")
 	public Object types() {
+		Map<String, Object> resp = new TreeMap<>();
+		resp.put("status", 0);
+
 		Map<String, Map<String, String>> cfgs = new TreeMap<>();
 		cfgs.put("button", getTypeMap(ButtonType.values()));
 		cfgs.put("form", getTypeMap(FormType.values()));
@@ -68,7 +106,9 @@ public class TemplateController {
 		cfgs.put("module", getTypeMap(ModuleType.values()));
 		cfgs.put("thead", getTypeMap(THeadType.values()));
 		cfgs.put("tbody", getTypeMap(TBodyType.values()));
-		return cfgs;
+		resp.put("data", cfgs);
+
+		return resp;
 	}
 
 	private Map<String, String> getTypeMap(BaseType[] types) {
@@ -82,6 +122,13 @@ public class TemplateController {
 	@ResponseBody
 	@RequestMapping("pages")
 	public Object pages() {
+		Map<String, Object> resp = new TreeMap<>();
+		resp.put("status", 0);
+		resp.put("data", pageMap());
+		return resp;
+	}
+
+	private Map<String, String> pageMap() {
 		Map<String, String> page = new TreeMap<>();
 		for (String key : map.keySet()) {
 			page.put(key, map.get(key).getTitle());

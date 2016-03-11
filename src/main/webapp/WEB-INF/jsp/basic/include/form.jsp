@@ -8,8 +8,8 @@
 				<c:forEach items="${module.form.cols}" var="col">
 					<div class="${col.clas}">
 						<div class="form-group">
-							<c:if test="${col.label}">
-								<label class="${col.labClas}">${col.label}</label>
+							<c:if test="${col.label ne null}">
+								<label class="control-label ${col.labClas}">${col.label}</label>
 							</c:if>
 							<div class="${col.iptClas}">
 								<c:if test="${col.ipts ne null}">
