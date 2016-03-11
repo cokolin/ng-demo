@@ -196,6 +196,7 @@
 				let ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "名称";
 				ipt.model = "vm.args.name";
+				ipt.name = "name";
 				col.addIpt(ipt);
 			}
 			form.addCol(col);
@@ -209,6 +210,7 @@
 				let ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "类型";
 				ipt.model = "vm.args.type";
+				ipt.name = "type";
 				col.addIpt(ipt);
 			}
 			form.addCol(col);
@@ -222,6 +224,7 @@
 				let ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "状态";
 				ipt.model = "vm.args.status";
+				ipt.name = "status";
 				col.addIpt(ipt);
 			}
 			form.addCol(col);
@@ -235,6 +238,7 @@
 				let ipt = new InputVo().init("TEXT");
 				ipt.placeholder = "修改人";
 				ipt.model = "vm.args.updateBy";
+				ipt.name = "updateBy";
 				col.addIpt(ipt);
 			}
 			form.addCol(col);
